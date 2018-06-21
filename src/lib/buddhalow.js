@@ -13,7 +13,6 @@ export class Buddhalow {
       let strSession
       try {
           strSession = await AsyncStorage.getItem('@Buddhalow:session')
-          console.log("SESSION", strSession)
       
       } catch (e) {
           throw e
@@ -23,13 +22,11 @@ export class Buddhalow {
           return null
       }
       let session = JSON.parse(strSession)
-      console.log("Session", session)
       if (session.issued && new Date().getTime() < session.issued + session.expires_in * 1000) {
           return session
       }
       } catch (e) {
           AsyncStorage.removeItem('@Buddhalow:session')
-          console.log(e)
           return null
       }
       return null
@@ -39,7 +36,6 @@ export class Buddhalow {
   }
   async isLoggedIn() {
       let loggedIn = await this.getSession()
-      console.log('is logged in', loggedIn)
       return loggedIn !== null
   }
   async logout() {
@@ -55,7 +51,6 @@ export class Buddhalow {
       + '&scope=read+write'
       + '&username=' + username
       + '&password=' + password
-      console.log(postData)
       let result = await fetch(
       API_ENDPOINT + '/oauth/token/',
       { 
@@ -68,7 +63,6 @@ export class Buddhalow {
       }
       ).then((response) => response.json())
       result.issued = new Date().getTime()
-      console.log(result)
       await this.setSession(result)
       if (result && result.token_type == 'Bearer') {
         return result
@@ -79,23 +73,28 @@ export class Buddhalow {
 }
 
 
-const httpLink = new HttpLink({ uri: GRAPH_API_URL })
+const httpLink = new HttpLink({ uri: GRAPH_API_URL })   
 const authLink = setContext(async (_, { headers }) => {
   // get the authentication token from local storage if it exists
-  let session = null
+  console.log("Loading...");
   try {
-    session = await buddhalow.getSession()
-  
-   console.log(session)
-  } catch (e) {
-    throw e
-  }
-  // return the headers to the context so httpLink can read them
-  return {
-    headers: {
-      ...headers,
-      authorization: session && session.access_token ? `Bearer ${session.access_token}` : "",
+    let strSession = await AsyncStorage.getItem('@Buddhalow:session')
+    if (!strSession) {
+      console.log(strSession)
+      throw 'No session found'
     }
+    
+    let session = JSON.parse(strSession)
+    console.log(session)
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        authorization: session && session.access_token ? `Bearer ${session.access_token}` : "",
+      }
+    }
+  } catch (err) {
+    throw err
   }
 })
 
@@ -112,12 +111,12 @@ const link = onError(({ graphQLErrors, networkError }) => {
 
 export let buddhalow = new Buddhalow()
 
+
+
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 })
-
-console.log(client)
 
 export default client;
 

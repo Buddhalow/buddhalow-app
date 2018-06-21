@@ -6,18 +6,16 @@ import gql from 'graphql-tag'
 import Loading from '../native/components/Loading';
 import Error from '../native/components/Error';
 
-const GET_NOTIFICATIONS = gql`
-    query getNotifications {
-       notifications {
+const GET_HEALS = gql`
+    query getHeals {
+       heals {
            id,
-           name,
-           description,
            time
        } 
     }
 `
 
-class Notifications extends Component {
+class Heals extends Component {
   static propTypes = {  
     Layout: PropTypes.func.isRequired
   }
@@ -26,7 +24,7 @@ class Notifications extends Component {
     const { Layout } = this.props;
     console.log("TF2")
     return (
-      <Query query={GET_NOTIFICATIONS}>
+      <Query query={GET_HEALS}>
         {({loading, error, data}) =>  {
           return <Layout data={data} error={error} loading={loading} />
         }}
@@ -41,4 +39,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
+export default connect(mapStateToProps, mapDispatchToProps)(Heals);

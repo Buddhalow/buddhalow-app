@@ -9,7 +9,7 @@ import Error from './Error';
 import Header from './Header';
 import Spacer from './Spacer';
 
-const NotificationsComponent = ({
+const HealsComponent = ({
   error,
   loading,
   data,
@@ -22,25 +22,25 @@ const NotificationsComponent = ({
   // Error
   if (error) return <Error content={error} />;
 
-  let notifications = data.notifications
+  let heals = data.heals
 
-  console.log(notifications)
+  console.log(heals)
 
-  const keyExtractor = item => item.id;
+  const keyExtractor = item => item.id; 
 
-  const onPress = item => Actions.notification({ match: { params: { id: String(item.id) } } });
-  if (!notifications) return <Error content={'Notifications cannot be NULL'} />
+  const onPress = item => Actions.heal({ match: { params: { id: String(item.id) } } });
+  if (!heals) return <Error content={'Heals cannot be NULL'} />
   return (
     <Container style={{'backgroundColor': '#fff'}}>
       <Content padder>
         <Header
-          title="Notifications"
-          content="Notifications from Buddhalow Music."
+          title="Heals"
+          content="Your latest heals"
         />
 
         <FlatList
           numColumns={1}
-          data={notifications}
+          data={heals}
           renderItem={({ item }) => (
             <Card transparent style={{ paddingHorizontal: 6 }}>
               <CardItem cardBody>
@@ -89,16 +89,16 @@ const NotificationsComponent = ({
   );
 };
 
-NotificationsComponent.propTypes = {
+HealsComponent.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
-  notifications: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  heals: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   reFetch: PropTypes.func,
 };
 
-NotificationsComponent.defaultProps = {
+HealsComponent.defaultProps = {
   error: null,
   reFetch: null,
 };
 
-export default NotificationsComponent;  
+export default HealsComponent;  

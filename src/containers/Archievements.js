@@ -3,30 +3,28 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import Loading from '../native/components/Loading';
-import Error from '../native/components/Error';
 
-const GET_NOTIFICATIONS = gql`
-    query getNotifications {
-       notifications {
+const GET_ARCHIEVEMENTS = gql`
+    query getArchivements {
+       archievements {
            id,
-           name,
-           description,
-           time
+           archievementType {
+               name
+           }
        } 
     }
 `
 
-class Notifications extends Component {
+class Archievements extends Component {
   static propTypes = {  
     Layout: PropTypes.func.isRequired
   }
 
   render() {
     const { Layout } = this.props;
-    console.log("TF2")
+    console.log("Loading archievement")
     return (
-      <Query query={GET_NOTIFICATIONS}>
+      <Query query={GET_ARCHIEVEMENTS}>
         {({loading, error, data}) =>  {
           return <Layout data={data} error={error} loading={loading} />
         }}
@@ -41,4 +39,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
+export default connect(mapStateToProps, mapDispatchToProps)(Archievements);

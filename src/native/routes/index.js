@@ -5,11 +5,20 @@ import { Icon } from 'native-base';
 import DefaultProps from '../constants/navigation';
 import AppConfig from '../../constants/config';
 
+let product = 'buddhalow'
+
 import NotificationsContainer from '../../containers/Notifications';
-import NotificationContainer from '../../containers/Notification';
-import RecipesComponent from '../components/Notifications';
-import NotificationComponent from '../components/Notification';
 import NotificationsComponent from '../components/Notifications';
+import NotificationContainer from '../../containers/Notification';
+import NotificationComponent from '../components/Notification';
+
+import ArchievementsContainer from '../../containers/Archievements';
+import ArchievementsComponent from '../components/Archievements';
+
+//== Product: cravity
+import HealsComponent from '../components/Heals'
+import HealsContainer from '../../containers/Heals'
+//== End Product cravity
 
 import SignUpContainer from '../../containers/SignUp';
 import SignUpComponent from '../components/SignUp';
@@ -42,22 +51,30 @@ const Index = (
         {...DefaultProps.tabProps}
       >
         <Stack
-          key="home"
-          title={AppConfig.appName.toUpperCase()}
-          icon={() => <Icon name="planet" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene key="home" component={AboutComponent} />
-        </Stack>
-
-        <Stack
           key="notifications"
-          title="NOTIFICATIONS"
+          title="FEED"
           icon={() => <Icon name="star" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
           <Scene key="notifications" component={NotificationsContainer} Layout={NotificationsComponent} />
         </Stack>
+        <Stack
+          key="archievements"
+          title="ARCHIEVEMENTS"
+          icon={() => <Icon name="star" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="archievements" component={ArchievementsContainer} Layout={ArchievementsComponent} />
+        </Stack>
+        {/*#==Product: Cravity*/}
+        <Stack
+          key="heals"
+          title="Heals"
+          icon={() => <Icon name="contact" {...DefaultProps.icons} />}>
+
+          <Scene key="heals" component={HealsContainer} Layout={HealsComponent} />
+        </Stack>
+        {/*#==End Product: Cravity*/}
         <Stack
           key="profile"
           title="ACCOUNT"

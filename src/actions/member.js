@@ -1,7 +1,7 @@
 import ErrorMessages from '../constants/errors';
 import statusMessage from './status';
 import { Firebase, FirebaseRef } from '../lib/firebase';
-
+import { AsyncStorage } from 'react-native'
 import {buddhalow} from '../lib/buddhalow'
 
 /**
@@ -48,41 +48,22 @@ export function signUp(formData) {
   * Get this User's Details
   */
 function getUserData(dispatch) {
-  const UID = (
-    FirebaseRef
-    && Firebase
-    && Firebase.auth()
-    && Firebase.auth().currentUser
-    && Firebase.auth().currentUser.uid
-  ) ? Firebase.auth().currentUser.uid : null;
 
-  if (!UID) return false;
-
-  const ref = FirebaseRef.child(`users/${UID}`);
-
-  return ref.on('value', (snapshot) => {
-    const userData = snapshot.val() || [];
-
+  
     return dispatch({
       type: 'USER_DETAILS_UPDATE',
-      data: userData,
+      data: {}
     });
-  });
 }
 
 export function getMemberData() {
-  if (Firebase === null) return () => new Promise(resolve => resolve());
-
-  // Ensure token is up to date
-  return dispatch => new Promise((resolve) => {
-    Firebase.auth().onAuthStateChanged((loggedIn) => {
-      if (loggedIn) {
-        return resolve(getUserData(dispatch));
-      }
-
-      return () => new Promise(() => resolve());
+   // Ensure token is up to date
+  return dispatch = () => AsyncStorage.getItem('@Buddhalow:session').then((session) => {
+    if (!session) return () => new Promise(resolve => resolve())
+    return dispatch => new Promise((resolve) => {
+      return resolve(JSON.parse(session));
     });
-  });
+  })
 }
 
 /**

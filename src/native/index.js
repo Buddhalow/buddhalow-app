@@ -15,6 +15,12 @@ import theme from '../../native-base-theme/variables/commonColor';
 import Routes from './routes/index';
 import Loading from './components/Loading';
 
+import client from '../lib/buddhalow'
+
+console.log("CLIENT", client)
+
+import { ApolloProvider } from "react-apollo";
+
 // Hide StatusBar on Android as it overlaps tabs
 if (Platform.OS === 'android') StatusBar.setHidden(true);
 import registerForPushNotificationsAsync from './registerForPushNotificationsAsync';
@@ -43,20 +49,22 @@ class App extends React.Component {
   render() {
     return (
       <Root>
-        <Provider store={this.props.store}>
-          <PersistGate
-            loading={<Loading />}
-            persistor={this.props.persistor}
-          >
-            <StyleProvider style={getTheme(this.props.theme)}>
-              <Router>
-                <Stack key="root">
-                  {Routes}
-                </Stack>
-              </Router>
-            </StyleProvider>
-          </PersistGate>
-        </Provider>
+        <ApolloProvider client={client}>
+          <Provider store={this.props.store}>
+            <PersistGate
+              loading={<Loading />}
+              persistor={this.props.persistor}
+            >
+              <StyleProvider style={getTheme(this.props.theme)}>
+                <Router>
+                  <Stack key="root">
+                    {Routes}
+                  </Stack>
+                </Router>
+              </StyleProvider>
+            </PersistGate>
+          </Provider>
+        </ApolloProvider>
       </Root>
     )
   }
