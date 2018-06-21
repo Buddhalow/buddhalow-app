@@ -5,7 +5,7 @@ import { Icon } from 'native-base';
 import DefaultProps from '../constants/navigation';
 import AppConfig from '../../constants/config';
 
-let product = 'buddhalow'
+let PRODUCT = 'aquafulness'
 
 import NotificationsContainer from '../../containers/Notifications';
 import NotificationsComponent from '../components/Notifications';
@@ -15,11 +15,11 @@ import NotificationComponent from '../components/Notification';
 import ArchievementsContainer from '../../containers/Archievements';
 import ArchievementsComponent from '../components/Archievements';
 
-//== Product: cravity
+
+// Produt cravity
 import HealsComponent from '../components/Heals'
 import HealsContainer from '../../containers/Heals'
-//== End Product cravity
-
+// End Product cravity
 import SignUpContainer from '../../containers/SignUp';
 import SignUpComponent from '../components/SignUp';
 
@@ -66,15 +66,43 @@ const Index = (
         >
           <Scene key="archievements" component={ArchievementsContainer} Layout={ArchievementsComponent} />
         </Stack>
-        {/*#==Product: Cravity*/}
+{(PRODUCT == 'cravity' &&
         <Stack
           key="heals"
           title="Heals"
-          icon={() => <Icon name="contact" {...DefaultProps.icons} />}>
-
+          icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
           <Scene key="heals" component={HealsContainer} Layout={HealsComponent} />
-        </Stack>
-        {/*#==End Product: Cravity*/}
+        </Stack> &&
+        <Stack
+        key="heals"
+        title="Heals"
+        icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+        {...DefaultProps.navbarProps}
+      >
+        <Scene key="heals" component={HealsContainer} Layout={HealsComponent} />
+      </Stack>
+) || (PRODUCT == 'aquafulness' && [
+        <Stack 
+          key="intervene"
+          title="INTERVENE"
+          backgroundColor="#eee"
+          tabStyle={{backgroundColor: '#ddd'}}
+          icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}>
+          <Scene key="heals" component={HealsContainer} Layout={HealsComponent} />
+        </Stack>,
+        <Stack
+      key="seeds"
+      title="SEEDS"
+      icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+      {...DefaultProps.navbarProps}>
+      <Scene key="seeds" component={HealsContainer} Layout={HealsComponent} />
+      </Stack>
+  
+]
+)}
         <Stack
           key="profile"
           title="ACCOUNT"

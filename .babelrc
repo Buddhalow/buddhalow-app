@@ -1,8 +1,20 @@
 {
   "presets": ["babel-preset-expo", "react-native-dotenv"],
+  "plugins": [
+    ["conditional-compilation", {
+      "DEBUG": 2,
+      "PRODUCT": "cravity"
+    }]
+  ],
   "env": {
     "development": {
-      "plugins": ["transform-react-jsx-source"]
+      "plugins": [
+        ["conditional-compilation", {
+          "DEBUG": 2,
+          "PRODUCT": "cravity"
+        }],
+        "transform-react-jsx-source"
+      ]
     }
   }
 }
