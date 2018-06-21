@@ -17,5 +17,5 @@ export default {
   status,
   member,
   recipes,
-  locale,
+  locale
 };

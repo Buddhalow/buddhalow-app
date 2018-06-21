@@ -5,9 +5,11 @@ import { Icon } from 'native-base';
 import DefaultProps from '../constants/navigation';
 import AppConfig from '../../constants/config';
 
-import RecipesContainer from '../../containers/Recipes';
-import RecipesComponent from '../components/Recipes';
-import RecipeViewComponent from '../components/Recipe';
+import NotificationsContainer from '../../containers/Notifications';
+import NotificationContainer from '../../containers/Notification';
+import RecipesComponent from '../components/Notifications';
+import NotificationComponent from '../components/Notification';
+import NotificationsComponent from '../components/Notifications';
 
 import SignUpContainer from '../../containers/SignUp';
 import SignUpComponent from '../components/SignUp';
@@ -34,9 +36,9 @@ const Index = (
     <Scene hideNavBar>
       <Tabs
         key="tabbar"
-        swipeEnabled
+        swipeEnabled 
         type="replace"
-        showLabel={false}
+        showLabel={true}
         {...DefaultProps.tabProps}
       >
         <Stack
@@ -49,17 +51,16 @@ const Index = (
         </Stack>
 
         <Stack
-          key="recipes"
-          title="RECIPES"
-          icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          key="notifications"
+          title="NOTIFICATIONS"
+          icon={() => <Icon name="star" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="recipes" component={RecipesContainer} Layout={RecipesComponent} />
+          <Scene key="notifications" component={NotificationsContainer} Layout={NotificationsComponent} />
         </Stack>
-
         <Stack
           key="profile"
-          title="PROFILE"
+          title="ACCOUNT"
           icon={() => <Icon name="contact" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
@@ -111,11 +112,11 @@ const Index = (
     <Scene
       back
       clone
-      key="recipe"
-      title="RECIPE"
+      key="notification"
+      title="NOTIFICATION"
       {...DefaultProps.navbarProps}
-      component={RecipesContainer}
-      Layout={RecipeViewComponent}
+      component={NotificationsContainer}
+      Layout={NotificationsComponent}
     />
   </Stack>
 );

@@ -16,3 +16,4 @@ build/
 .gradle
 local.properties
 *.iml
+.env

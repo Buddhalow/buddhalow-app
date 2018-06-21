@@ -29,6 +29,8 @@ const configureStore = () => {
     () => { store.getState(); },
   );
 
+  console.log(store)
+
   return { persistor, store };
 };
 
