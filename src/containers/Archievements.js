@@ -8,6 +8,7 @@ const GET_ARCHIEVEMENTS = gql`
     query getArchivements {
        archievements {
            id,
+           time,
            archievementType {
                name
            }

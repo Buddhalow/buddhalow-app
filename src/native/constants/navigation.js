@@ -29,6 +29,6 @@ export default {
     tabBarStyle: { backgroundColor: '#ffffff' },
   },
   icons: {
-    style: { color: '#555', height: 30, width: 30 },
+    style: { color: '#888', height: 30, width: 30 },
   },
 };

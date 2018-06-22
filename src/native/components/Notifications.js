@@ -26,23 +26,18 @@ const NotificationsComponent = ({
 
   console.log(notifications)
 
-  const keyExtractor = item => item.id;
+  const keyExtractor = item => item.id; 
 
   const onPress = item => Actions.notification({ match: { params: { id: String(item.id) } } });
   if (!notifications) return <Error content={'Notifications cannot be NULL'} />
   return (
     <Container style={{'backgroundColor': '#fff'}}>
       <Content padder>
-        <Header
-          title="Notifications"
-          content="Notifications from Buddhalow Music."
-        />
-
         <FlatList
           numColumns={1}
           data={notifications}
           renderItem={({ item }) => (
-            <Card transparent style={{ paddingHorizontal: 6 }}>
+            <Card transparent style={{ padding: 12, backgroundColor: '#eee' }}>
               <CardItem cardBody>
                 <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
                   <Image
@@ -56,20 +51,9 @@ const NotificationsComponent = ({
                   />
                 </TouchableOpacity>
               </CardItem>
-              <CardItem cardBody>
+              <CardItem cardBody style={{ backgroundColor: '#eee'}}>
                 <Body>
-                  <Spacer size={10} />
                   <Text style={{ fontWeight: '800' }}>{item.name}</Text>
-                  <Spacer size={15} />
-                  <Button
-                    block
-                    bordered
-                    small
-                    onPress={() => onPress(item)}
-                  >
-                    <Text>View</Text>
-                  </Button>
-                  <Spacer size={5} />
                 </Body>
               </CardItem>
             </Card>

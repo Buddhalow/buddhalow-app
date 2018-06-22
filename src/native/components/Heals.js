@@ -8,6 +8,8 @@ import Loading from './Loading';
 import Error from './Error';
 import Header from './Header';
 import Spacer from './Spacer';
+import moment from 'moment'
+import numeral from 'numeral'
 
 const HealsComponent = ({
   error,
@@ -33,43 +35,20 @@ const HealsComponent = ({
   return (
     <Container style={{'backgroundColor': '#fff'}}>
       <Content padder>
-        <Header
-          title="Heals"
-          content="Your latest heals"
-        />
-
         <FlatList
+          flexGrow={1}
           numColumns={1}
           data={heals}
           renderItem={({ item }) => (
-            <Card transparent style={{ paddingHorizontal: 6 }}>
-              <CardItem cardBody>
-                <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
-                  <Image
-                    source={{ uri: item.image_url }}
-                    style={{
-                      height: 100,
-                      width: null,
-                      flex: 1,
-                      borderRadius: 5,
-                    }}
-                  />
-                </TouchableOpacity>
+            <Card transparent>
+              <CardItem cardBody style={{backgroundColor: '#ddd'}}>
+                <Body style={{ padding: 12, backgroundColor: '#ddd'}}>
+                 <Text style={{ fontWeight: '800' }}>Healthy meal</Text>
+                </Body>
               </CardItem>
-              <CardItem cardBody>
+              <CardItem>
                 <Body>
-                  <Spacer size={10} />
-                  <Text style={{ fontWeight: '800' }}>{item.name}</Text>
-                  <Spacer size={15} />
-                  <Button
-                    block
-                    bordered
-                    small
-                    onPress={() => onPress(item)}
-                  >
-                    <Text>View</Text>
-                  </Button>
-                  <Spacer size={5} />
+                  <Text>{moment(item.time).fromNow()}</Text>
                 </Body>
               </CardItem>
             </Card>

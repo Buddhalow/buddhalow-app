@@ -5,7 +5,7 @@ import { Icon } from 'native-base';
 import DefaultProps from '../constants/navigation';
 import AppConfig from '../../constants/config';
 
-let PRODUCT = 'aquafulness'
+let PRODUCT = 'cravity'
 
 import NotificationsContainer from '../../containers/Notifications';
 import NotificationsComponent from '../components/Notifications';
@@ -17,6 +17,7 @@ import ArchievementsComponent from '../components/Archievements';
 
 
 // Produt cravity
+import AddHealComponent from '../components/AddHeal'
 import HealsComponent from '../components/Heals'
 import HealsContainer from '../../containers/Heals'
 // End Product cravity
@@ -66,24 +67,24 @@ const Index = (
         >
           <Scene key="archievements" component={ArchievementsContainer} Layout={ArchievementsComponent} />
         </Stack>
-{(PRODUCT == 'cravity' &&
+{(PRODUCT == 'cravity' && [
         <Stack
-          key="heals"
-          title="Heals"
-          icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+          key="addHeal"
+          title="ADD HEAL"
+          icon={() => <Icon name="star" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="heals" component={HealsContainer} Layout={HealsComponent} />
-        </Stack> &&
+          <Scene key="addHeal" component={AddHealComponent} />
+        </Stack>,
         <Stack
         key="heals"
-        title="Heals"
+        title="HEALS"
         icon={() => <Icon name="contact" {...DefaultProps.icons} />}
         {...DefaultProps.navbarProps}
       >
         <Scene key="heals" component={HealsContainer} Layout={HealsComponent} />
       </Stack>
-) || (PRODUCT == 'aquafulness' && [
+]) || (PRODUCT == 'aquafulness' && [
         <Stack 
           key="intervene"
           title="INTERVENE"

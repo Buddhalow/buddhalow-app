@@ -9,6 +9,9 @@ import Error from './Error';
 import Header from './Header';
 import Spacer from './Spacer';
 
+import numeral from 'numeral'
+import moment from 'moment'
+
 const ArchievementsComponent = ({
   error,
   loading,
@@ -33,26 +36,29 @@ const ArchievementsComponent = ({
   archievements = archievements.map (o => {
       return {
           id: o.id,
+          time: o.time,
           name: o.archievementType.name
       }
   })
   return (
-    <Container style={{'backgroundColor': '#fff'}}>
-      <Content padder>
-        <Header
-          title="Archievements"
-          content="Your archievements"
-        />
+    <Container style={{'backgroundColor': '#fff'}}> 
+      <Content padder >
+        <Text style={{textAlign: 'right', fontWeight: 'bold', fontSize: 120}}>000 000,00</Text>
+        <Text style={{textAlign: 'right'}}>karma</Text>
 
         <FlatList
           numColumns={5}
           data={archievements}
           renderItem={({ item }) => (
-            <Card transparent style={{ paddingHorizontal: 6, backgroundColor: '#FFaa00' }}>
-              <CardItem cardBody style={{backgroundColor: '#FFaa00'}}>
-                <Body>
+            <Card transparent>
+              <CardItem cardBody style={{backgroundColor: '#FFffee'}}>
+                <Body style={{ padding: 12, backgroundColor: '#FFffee' }}>
                   <Text style={{ fontWeight: '800' }}>{item.name}</Text>
-                 
+                </Body>
+              </CardItem>
+              <CardItem>
+                <Body>
+                  <Text>{moment(item.time).fromNow()}</Text>
                 </Body>
               </CardItem>
             </Card>
