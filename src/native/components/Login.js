@@ -45,8 +45,10 @@ class Login extends React.Component {
 
   handleSubmit = () => {
     this.props.onFormSubmit(this.state)
-      .then(() => Actions.tabbar())
-      .catch(e => console.log(`Error: ${e}`));
+      .then(() => {
+        Actions.tabbar()
+        Actions.refresh(true)
+      }).catch(e => console.log(`Error: ${e}`));
   }
 
   render() {

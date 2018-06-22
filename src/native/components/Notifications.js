@@ -10,62 +10,66 @@ import Header from './Header';
 import Spacer from './Spacer';
 import moment from 'moment'
 
-const NotificationsComponent = ({
-  error,
-  loading,
-  data,
-  reFetch,
-}) => {
-  // Loading
-  console.log(loading, data, error)
-  if (loading || !data) return <Loading />; 
+class NotificationsComponent extends React.Component {
 
-  // Error
-  if (error) return <Error content={error} />;
+  render() {
+    let {
+      error,
+      loading,
+      data,
+      reFetch,
+    } = this.props
+    // Loading
+    console.log(loading, data, error)
+    if (loading || !data) return <Loading />; 
 
-  let notifications = data.notifications
+    // Error
+    if (error) return <Error content={error} />;
 
-  console.log(notifications)
+    let notifications = data.notifications
 
-  const keyExtractor = item => item.id; 
+    console.log(notifications)
 
-  const onPress = item => Actions.notification({ match: { params: { id: String(item.id) } } });
-  if (!notifications) return <Error content={'Notifications cannot be NULL'} />
-  return (
-    <Container style={{'backgroundColor': '#fff'}}>
-      <Content padder>
-        <FlatList
-          numColumns={1}
-          data={notifications}
-          renderItem={({ item }) => (
-            <Card transparent style={{ padding: 56 }}>
-              
-              <CardItem cardBody>
-                <Body style={{ padding: 28, backgroundColor: '#eee'}}>
-                  <Text style={{ fontWeight: '800' }}>{item.name}</Text>
-                </Body>
-              </CardItem>
-              <CardItem cardBody style={{padding: 28}}>
-                <Body>
-                  <Text>{moment(item.time).fromNow()}</Text>
-                </Body>
-              </CardItem>
-            </Card>
-          )}
-          keyExtractor={keyExtractor}
-          refreshControl={
-            <RefreshControl
-              refreshing={loading}
-              onRefresh={reFetch}
-            />
-          }
-        />
+    const keyExtractor = item => item.id; 
 
-        <Spacer size={20} />
-      </Content>
-    </Container>
-  );
-};
+    const onPress = item => Actions.notification({ match: { params: { id: String(item.id) } } });
+    if (!notifications) return <Error content={'Notifications cannot be NULL'} />
+    return (
+      <Container style={{'backgroundColor': '#fff'}}>
+        <Content padder>
+          <FlatList
+            numColumns={1}
+            data={notifications}
+            renderItem={({ item }) => (
+              <Card transparent style={{ padding: 56 }}>
+                
+                <CardItem cardBody>
+                  <Body style={{ padding: 28, backgroundColor: '#eee'}}>
+                    <Text style={{ fontWeight: '800' }}>{item.name}</Text>
+                  </Body>
+                </CardItem>
+                <CardItem cardBody style={{padding: 28}}>
+                  <Body>
+                    <Text>{moment(item.time).fromNow()}</Text>
+                  </Body>
+                </CardItem>
+              </Card>
+            )}
+            keyExtractor={keyExtractor}
+            refreshControl={
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={reFetch}
+              />
+            }
+          />
+
+          <Spacer size={20} />
+        </Content>
+      </Container>
+    );
+  }
+}
 
 NotificationsComponent.propTypes = {
   error: PropTypes.string,

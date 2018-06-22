@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scene, Tabs, Stack } from 'react-native-router-flux';
+import { Scene, Tabs, Stack, Modal } from 'react-native-router-flux';
 import { Icon } from 'native-base';
 
 import { PRODUCT } from 'react-native-dotenv'
@@ -42,8 +42,8 @@ import ProfileComponent from '../components/Profile';
 import AboutComponent from '../components/About';
 
 const Index = (
-  <Stack>
-    <Scene hideNavBar>
+  <Modal>
+    <Scene hideNavBar key="root">
       <Tabs
         key="tabbar"
         swipeEnabled 
@@ -111,30 +111,7 @@ const Index = (
           {...DefaultProps.navbarProps}
         >
           <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
-          <Scene
-            back
-            key="signUp"
-            title="SIGN UP"
-            {...DefaultProps.navbarProps}
-            component={SignUpContainer}
-            Layout={SignUpComponent}
-          />
-          <Scene
-            back
-            key="login"
-            title="LOGIN"
-            {...DefaultProps.navbarProps}
-            component={LoginContainer}
-            Layout={LoginComponent}
-          />
-          <Scene
-            back
-            key="forgotPassword"
-            title="FORGOT PASSWORD"
-            {...DefaultProps.navbarProps}
-            component={ForgotPasswordContainer}
-            Layout={ForgotPasswordComponent}
-          />
+          
           <Scene
             back
             key="locale"
@@ -154,7 +131,36 @@ const Index = (
         </Stack>
       </Tabs>
     </Scene>
-
+    <Scene
+      back
+      key="signUp"
+      title="SIGN UP"
+      {...DefaultProps.navbarProps}
+      component={SignUpContainer}
+      Layout={SignUpComponent}
+      hideTabBar
+      hideNavBar
+    />
+    <Scene
+      back
+      key="login"
+      title="LOGIN"
+      {...DefaultProps.navbarProps}
+      component={LoginContainer}
+      Layout={LoginComponent}
+      hideTabBar
+      hideNavBar
+    />
+    <Scene
+      back
+      key="forgotPassword"
+      title="FORGOT PASSWORD"
+      {...DefaultProps.navbarProps}
+      component={ForgotPasswordContainer}
+      Layout={ForgotPasswordComponent}
+      hideTabBar
+      hideNavBar
+    />
     <Scene
       back
       clone
@@ -163,8 +169,10 @@ const Index = (
       {...DefaultProps.navbarProps}
       component={NotificationsContainer}
       Layout={NotificationsComponent}
+      hideTabBar
+      hideNavBar
     />
-  </Stack>
+  </Modal>
 );
 
 export default Index;

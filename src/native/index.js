@@ -1,8 +1,8 @@
 import React from 'react';
-import { StatusBar, Platform } from 'react-native';
+import { StatusBar, Platform, AsyncStorage } from 'react-native';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { Router, Stack } from 'react-native-router-flux';
+import { Router, Stack, Actions } from 'react-native-router-flux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 import {
   Notifications,
@@ -29,18 +29,24 @@ class App extends React.Component {
   state = {
     notification: {},
   }
-  componentDidMount() {
-    try {
-      registerForPushNotificationsAsync();
-    } catch (e) {
-
-    }
+  async componentDidMount() {
+    
     // Handle notifications that are received or selected while the app
     // is open. If the app was closed and then opened by tapping the
     // notification (rather than just tapping the app icon to open it),
     // this function will fire on the next tick after the app starts
     // with the notification data.
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
+    let session = await AsyncStorage.getItem('@Buddhalow:session')
+    if (!session) {
+      Actions.logIn()
+    } else {
+      try {
+        registerForPushNotificationsAsync();
+      } catch (e) {
+  
+      }
+    }
   }
   _handleNotification = (notification) => {
     this.setState({notification: notification});

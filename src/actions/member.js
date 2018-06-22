@@ -4,6 +4,8 @@ import { Firebase, FirebaseRef } from '../lib/firebase';
 import { AsyncStorage } from 'react-native'
 import {buddhalow} from '../lib/buddhalow'
 
+import registerForPushNotificationsAsync from '../native/registerForPushNotificationsAsync';
+
 /**
   * Sign Up to Firebase
   */
