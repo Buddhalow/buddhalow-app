@@ -2,6 +2,7 @@ import status from './status';
 import member from './member';
 import recipes from './recipes';
 import locale from './locale';
+import product from './product'
 
 const rehydrated = (state = false, action) => {
   switch (action.type) {
@@ -17,5 +18,6 @@ export default {
   status,
   member,
   recipes,
-  locale
+  locale,
+  product
 };

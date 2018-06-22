@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import { PRODUCT } from 'react-native-dotenv'
 
 const GET_ARCHIEVEMENTS = gql`
-    query getArchivements {
-       archievements {
+    query getArchivements($product: String!) {
+       archievements(product: $product) {
            id,
            time,
            archievementType {
@@ -25,7 +26,7 @@ class Archievements extends Component {
     const { Layout } = this.props;
     console.log("Loading archievement")
     return (
-      <Query query={GET_ARCHIEVEMENTS}>
+      <Query query={GET_ARCHIEVEMENTS} variables={{product: PRODUCT}}>
         {({loading, error, data}) =>  {
           return <Layout data={data} error={error} loading={loading} />
         }}

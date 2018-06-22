@@ -6,9 +6,11 @@ import gql from 'graphql-tag'
 import Loading from '../native/components/Loading';
 import Error from '../native/components/Error';
 
+import { PRODUCT } from 'react-native-dotenv'
+
 const GET_NOTIFICATIONS = gql`
-    query getNotifications {
-       notifications {
+    query getNotifications($product: String!) {
+       notifications(product: $product) {
            id,
            name,
            description,
@@ -26,7 +28,7 @@ class Notifications extends Component {
     const { Layout } = this.props;
     console.log("TF2")
     return (
-      <Query query={GET_NOTIFICATIONS}>
+      <Query query={GET_NOTIFICATIONS} variables={{product: PRODUCT}}>
         {({loading, error, data}) =>  {
           return <Layout data={data} error={error} loading={loading} />
         }}

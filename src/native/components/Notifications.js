@@ -8,6 +8,7 @@ import Loading from './Loading';
 import Error from './Error';
 import Header from './Header';
 import Spacer from './Spacer';
+import moment from 'moment'
 
 const NotificationsComponent = ({
   error,
@@ -37,23 +38,16 @@ const NotificationsComponent = ({
           numColumns={1}
           data={notifications}
           renderItem={({ item }) => (
-            <Card transparent style={{ padding: 12, backgroundColor: '#eee' }}>
+            <Card transparent style={{ padding: 56 }}>
+              
               <CardItem cardBody>
-                <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
-                  <Image
-                    source={{ uri: item.image_url }}
-                    style={{
-                      height: 100,
-                      width: null,
-                      flex: 1,
-                      borderRadius: 5,
-                    }}
-                  />
-                </TouchableOpacity>
-              </CardItem>
-              <CardItem cardBody style={{ backgroundColor: '#eee'}}>
-                <Body>
+                <Body style={{ padding: 28, backgroundColor: '#eee'}}>
                   <Text style={{ fontWeight: '800' }}>{item.name}</Text>
+                </Body>
+              </CardItem>
+              <CardItem cardBody style={{padding: 28}}>
+                <Body>
+                  <Text>{moment(item.time).fromNow()}</Text>
                 </Body>
               </CardItem>
             </Card>

@@ -2,10 +2,10 @@ import React from 'react';
 import { Scene, Tabs, Stack } from 'react-native-router-flux';
 import { Icon } from 'native-base';
 
+import { PRODUCT } from 'react-native-dotenv'
 import DefaultProps from '../constants/navigation';
 import AppConfig from '../../constants/config';
 
-let PRODUCT = 'cravity'
 
 import NotificationsContainer from '../../containers/Notifications';
 import NotificationsComponent from '../components/Notifications';
