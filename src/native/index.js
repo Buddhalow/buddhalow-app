@@ -44,7 +44,7 @@ class App extends React.Component {
       try {
         registerForPushNotificationsAsync();
       } catch (e) {
-  
+        console.log(e.stack)
       }
     }
   }
@@ -62,7 +62,7 @@ class App extends React.Component {
               persistor={this.props.persistor}
             >
               <StyleProvider style={getTheme(this.props.theme)}>
-                <Router>
+                <Router uriPrefix={'buddhalow.app'}>
                   <Stack key="root">
                     {Routes}
                   </Stack>

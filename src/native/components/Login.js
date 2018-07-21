@@ -48,7 +48,7 @@ class Login extends React.Component {
       .then(() => {
         Actions.tabbar()
         Actions.refresh(true)
-      }).catch(e => console.log(`Error: ${e}`));
+        }).catch(e => console.log(`Error: ${e}`));
   }
 
   render() {

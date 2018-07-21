@@ -4,6 +4,7 @@
     "name": "Buddhalow",
     "slug": "buddhalow",
     "icon": "src/images/app-icon.png",
-    "privacy": "public"
+    "privacy": "unlisted",
+    "scheme": "buddhalow"
   }
 }

@@ -1,24 +1,36 @@
+import { AsyncStorage } from 'react-native'
+
 import { Permissions, Notifications } from 'expo';
 
 import { PUSH_ENDPOINT } from 'react-native-dotenv'
 
-async function registerForPushNotificationsAsync() {
+export default async function registerForPushNotificationsAsync() {
     let token = await getPushToken()
-    let session = await buddhalow.getSession()
-
+    let strSession = await AsyncStorage.getItem('@Buddhalow:session')
+    let session = null
+    if (strSession) {
+      session = JSON.parse(strSession)
+    } else {
+      throw "No session"
+    }
+    let payload = {
+      token: {
+        value: token,
+      },
+      access_token: session.access_token,
+      session: session
+    }
+    let body = JSON.stringify(payload)
+    console.log(payload)
+    console.log("#PUSH_ENDPOINT", PUSH_ENDPOINT)
     // POST the token to your backend server from where you can retrieve it to send push notifications.
-    return fetch(PUSH_ENDPOINT, {
+    return await fetch(PUSH_ENDPOINT, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        token: {
-          value: token,
-        },
-        session: session
-      }),
+      body: body,
     });
 }
 

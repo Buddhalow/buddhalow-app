@@ -11,7 +11,6 @@ import Spacer from './Spacer';
 import moment from 'moment'
 
 class NotificationsComponent extends React.Component {
-
   render() {
     let {
       error,

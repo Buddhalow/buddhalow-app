@@ -56,8 +56,9 @@ const Index = (
           title="FEED"
           icon={() => <Icon name="star" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
+          
         >
-          <Scene key="notifications" component={NotificationsContainer} Layout={NotificationsComponent} />
+          <Scene key="notifications" path={'/feed'} component={NotificationsContainer} Layout={NotificationsComponent} />
         </Stack>
         <Stack
           key="archievements"
@@ -65,7 +66,7 @@ const Index = (
           icon={() => <Icon name="star" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="archievements" component={ArchievementsContainer} Layout={ArchievementsComponent} />
+          <Scene key="archievements" path={'/archievement/:id'} component={ArchievementsContainer} Layout={ArchievementsComponent} />
         </Stack>
 {(PRODUCT == 'cravity' && [
         <Stack
@@ -74,12 +75,12 @@ const Index = (
           icon={() => <Icon name="star" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="addHeal" component={AddHealComponent} />
+          <Scene key="addHeal" path={'/heal'} component={AddHealComponent} />
         </Stack>,
         <Stack
         key="heals"
         title="HEALS"
-        icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+        icon={() => <Icon name="contact" path={'/heals'}  {...DefaultProps.icons} />}
         {...DefaultProps.navbarProps}
       >
         <Scene key="heals" component={HealsContainer} Layout={HealsComponent} />
@@ -92,7 +93,7 @@ const Index = (
           tabStyle={{backgroundColor: '#ddd'}}
           icon={() => <Icon name="contact" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}>
-          <Scene key="heals" component={HealsContainer} Layout={HealsComponent} />
+          <Scene key="heals" path={'/intervene'}  component={HealsContainer} Layout={HealsComponent} />
         </Stack>,
         <Stack
       key="seeds"
@@ -103,7 +104,17 @@ const Index = (
       </Stack>
   
 ]
-)}
+) || (PRODUCT == 'bathing') && [
+      <Stack 
+        key="intervene"
+        title="INTERVENE"
+        backgroundColor="#eee"
+        tabStyle={{backgroundColor: '#ddd'}}
+        icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+        {...DefaultProps.navbarProps}>
+        <Scene key="heals" path={'/intervene'}  component={HealsContainer} Layout={HealsComponent} />
+      </Stack>,
+]}
         <Stack
           key="profile"
           title="ACCOUNT"
@@ -119,10 +130,12 @@ const Index = (
             {...DefaultProps.navbarProps}
             component={LocaleContainer}
             Layout={LocaleComponent}
+            path={'/config/language'}
           />
           <Scene
             back
             key="updateProfile"
+            path={'/profile'}
             title="UPDATE PROFILE"
             {...DefaultProps.navbarProps}
             component={UpdateProfileContainer}
@@ -135,6 +148,7 @@ const Index = (
       back
       key="signUp"
       title="SIGN UP"
+      path={'/register'}
       {...DefaultProps.navbarProps}
       component={SignUpContainer}
       Layout={SignUpComponent}
@@ -145,6 +159,7 @@ const Index = (
       back
       key="login"
       title="LOGIN"
+      path={'/login'}
       {...DefaultProps.navbarProps}
       component={LoginContainer}
       Layout={LoginComponent}
@@ -155,6 +170,7 @@ const Index = (
       back
       key="forgotPassword"
       title="FORGOT PASSWORD"
+      path={'/forgot'}
       {...DefaultProps.navbarProps}
       component={ForgotPasswordContainer}
       Layout={ForgotPasswordComponent}
