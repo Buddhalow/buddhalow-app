@@ -8,11 +8,10 @@ import { Sidebar } from './Sidebar';
 
 const Template = ({ children }) => (
   <div>
-    <Member Layout={Header} />
     <Container fluid>
       <Row>
         <Sidebar />
-        <Col md="10" sm="9" className="px-sm-5 py-sm-5 ml-sm-auto">
+        <Col md="10" sm="9" className="px-sm-5 ml-sm-auto">
           {children}
           <Footer />
         </Col>

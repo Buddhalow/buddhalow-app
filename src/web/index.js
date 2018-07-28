@@ -9,6 +9,11 @@ import configureStore from '../store/index';
 import registerServiceWorker from './register-service-worker';
 import Routes from './routes/index';
 
+import client from '../lib/buddhalow'
+
+console.log("CLIENT", client)
+
+import { ApolloProvider } from "react-apollo";
 // Components
 import Loading from './components/Loading';
 
@@ -21,6 +26,7 @@ const { persistor, store } = configureStore();
 const rootElement = document.getElementById('root');
 
 const Root = () => (
+  <ApolloProvider client={client}>
   <Provider store={store}>
     <PersistGate loading={<Loading />} persistor={persistor}>
       <Router>
@@ -28,6 +34,7 @@ const Root = () => (
       </Router>
     </PersistGate>
   </Provider>
+  </ApolloProvider>
 );
 
 render(<Root />, rootElement);

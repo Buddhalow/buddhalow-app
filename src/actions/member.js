@@ -1,10 +1,8 @@
 import ErrorMessages from '../constants/errors';
 import statusMessage from './status';
 import { Firebase, FirebaseRef } from '../lib/firebase';
-import { AsyncStorage } from 'react-native'
 import {buddhalow} from '../lib/buddhalow'
-
-import registerForPushNotificationsAsync from '../native/registerForPushNotificationsAsync';
+import { AsyncStorage } from '../storage'
 
 /**
   * Sign Up to Firebase
@@ -21,12 +19,12 @@ export function signUp(formData) {
   return dispatch => new Promise(async (resolve, reject) => {
     // Validation checks
     if (!firstName) return reject({ message: ErrorMessages.missingFirstName });
-    if (!lastName) return reject({ message: ErrorMessages.missingLastName });
+    if (!lastName) return reject({ message: ErrorMessages.missingLastName }); 
     if (!email) return reject({ message: ErrorMessages.missingEmail });
     if (!password) return reject({ message: ErrorMessages.missingPassword });
     if (!password2) return reject({ message: ErrorMessages.missingPassword });
     if (password !== password2) return reject({ message: ErrorMessages.passwordsDontMatch });
-
+    
     await statusMessage(dispatch, 'loading', true);
 
     // Go to Firebase
@@ -60,11 +58,19 @@ function getUserData(dispatch) {
 
 export function getMemberData() {
    // Ensure token is up to date
-  return dispatch = () => AsyncStorage.getItem('@Buddhalow:session').then((session) => {
-    if (!session) return () => new Promise(resolve => resolve())
-    return dispatch => new Promise((resolve) => {
-      return resolve(JSON.parse(session));
-    });
+  return dispatch => new Promise((resolve, reject) => {
+    AsyncStorage.getItem('@Buddhalow:session').then((session) => {
+      if (!session) reject(
+        dispatch({
+          type: 'USER_LOGIN',
+          data: JSON.parse(session)
+        })
+      )
+      resolve(dispatch({
+        type: 'USER_LOGIN',
+        data: JSON.parse(session)
+      }));
+    })
   })
 }
 
@@ -85,6 +91,7 @@ export function login(formData) {
     
     return buddhalow.logIn(email, password).then(async (res) => {
       await statusMessage(dispatch, 'loading', false);
+      console.log(res)
       return resolve(dispatch({
         type: 'USER_LOGIN',
         data: res,

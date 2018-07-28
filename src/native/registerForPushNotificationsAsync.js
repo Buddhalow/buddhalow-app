@@ -27,6 +27,7 @@ export default async function registerForPushNotificationsAsync() {
     return await fetch(PUSH_ENDPOINT, {
       method: 'POST',
       headers: {
+        
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },

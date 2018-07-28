@@ -77,7 +77,7 @@ class Login extends React.Component {
                   <FormGroup>
                     <Label for="email">Email</Label>
                     <Input
-                      type="email"
+                      type="text"
                       name="email"
                       id="email"
                       placeholder="john@doe.corp"

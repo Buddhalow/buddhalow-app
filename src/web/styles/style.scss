@@ -4,9 +4,11 @@
 @import "components/loading";
 @import "components/header";
 @import "components/footer";
+@import "components/entry";
+@import "components/bungalow";
 
 body {
-  padding-top: 3.5em;
+  font-size: 11pt;
 }
 
 /**

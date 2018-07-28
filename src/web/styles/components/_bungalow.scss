@@ -1,0 +1,99 @@
+:root {
+    --background-color: #333;
+    
+
+    --brand-secondary:
+     #E6C7B7 !important;
+    --brand-primary: #F57C00;
+    --foreground-color: white;
+}
+html, body {
+    height: 100%;
+}
+bungalow-a {
+    cursor: pointer;
+    opacity: .9;
+}
+
+bungalow-a:hover {
+    text-decoration: underline;
+    opacity: 1;
+}
+body {
+user-select: none;
+cursor: default;    
+}
+.primary {
+    color: $primary;
+}
+body {
+    background-attachment: fixed;
+}
+bungalow-infobar {
+    display: none;
+}
+.avatar {
+    border-radius: 28pt;
+    overflow: hidden;
+    border: 1pt solid transparent;
+    background-color: white;
+    box-shadow: none;
+}
+table {
+    border-collapse: collapse;
+}
+.btn {
+    transition: background 0.5s;
+    border: 1pt solid #888;
+}
+h1, h2, h3, h4 {
+    margin-top: 3pt;
+}
+input {
+    border: 1pt solid #888;
+}
+
+.disabled td {
+    opacity: 0.3;
+}
+
+.foredrop {
+    background-size: 250% 250% !important; 
+    background-position: 50% 50%;
+    opacity: 0.18;
+    width: 100%;
+    height: 100%;
+    left: 0pt;
+    top: 0pt;
+    position: fixed;
+    pointer-events: none;
+}
+
+bungalow-tabbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12pt;
+    position: sticky;
+}
+bungalow-tab {
+    padding: 5pt;
+    opacity: 0.5;
+}
+bungalow-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20pt;
+}
+
+bungalow-tab {
+    border-bottom: 1pt solid rgba(0, 0, 0, .1);
+    
+}
+.active-tab {
+    border-bottom: 3pt solid $primary;
+    opacity: 1;
+}

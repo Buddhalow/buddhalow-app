@@ -8,9 +8,12 @@ import TemplateSidebar from '../components/TemplateSidebar';
 // Routes
 import Home from '../components/Home';
 
-import RecipesContainer from '../../containers/Recipes';
-import RecipesComponent from '../components/Recipes';
-import RecipeViewComponent from '../components/Recipe';
+import DashboardComponent from '../components/Dashboard'
+import Dashboard from '../../containers/Dashboard'
+import HousingComponent from '../components/Housing'
+import HousingContainer from '../../containers/Housing'
+import BungalowComponent from '../components/Bungalow'
+import BungalowContainer from '../../containers/Bungalow'
 
 import SignUpContainer from '../../containers/SignUp';
 import SignUpComponent from '../components/SignUp';
@@ -26,6 +29,8 @@ import UpdateProfileComponent from '../components/UpdateProfile';
 
 import Error from '../components/Error';
 
+import * as dom from '../dom/elements';
+
 const Index = () => (
   <Switch>
     <Route
@@ -33,16 +38,24 @@ const Index = () => (
       path="/"
       render={props => (
         <TemplateSidebar>
-          <Home {...props} />
+          <Dashboard {...props} Layout={DashboardComponent} />
         </TemplateSidebar>
       )}
     />
     <Route
-      path="/sign-up"
+      path="/housing"
       render={props => (
-        <TemplateNothing>
-          <SignUpContainer {...props} Layout={SignUpComponent} />
-        </TemplateNothing>
+        <TemplateSidebar>
+          <HousingContainer {...props} Layout={HousingComponent} />
+        </TemplateSidebar>
+      )}
+    />
+    <Route
+      path="/bungalow/:id"
+      render={props => (
+        <TemplateSidebar>
+          <BungalowContainer {...props} Layout={BungalowComponent} />
+        </TemplateSidebar>
       )}
     />
     <Route
@@ -74,14 +87,6 @@ const Index = () => (
       render={props => (
         <TemplateSidebar>
           <RecipesContainer {...props} Layout={RecipesComponent} />
-        </TemplateSidebar>
-      )}
-    />
-    <Route
-      path="/recipe/:id"
-      render={props => (
-        <TemplateSidebar>
-          <RecipesContainer {...props} Layout={RecipeViewComponent} />
         </TemplateSidebar>
       )}
     />
