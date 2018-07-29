@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import numeral from 'numeral'
+import {Link} from 'react-router-dom'
 import PageHeader from './PageHeader'
 import {Line} from 'react-chartjs-2'
 
@@ -54,7 +55,39 @@ const Bungalow = ({result}) => {
                     {
                         className: 'container'
                     },
-                    
+                    React.createElement(
+                        Line,
+                        {
+                            min: -280000,
+                            max: 0,
+                            step: 100000,
+                            data: {
+                                datasets: [
+                                    {
+                                        label: 'Entropy',
+                                        borderColor: [getComputedStyle(document.body).getPropertyValue('--brand-primary')],
+                                        backgroundColor: 'transparent',
+                                        data: result.bungalow.transactionSet.map(o => o.balance),
+                                    }
+                                ],
+                                labels: result.bungalow.transactionSet.map(o => moment(o.time).format('YYYY-MM-DD'))
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            min: -500,
+                                            max: 0,
+                                            stepSize: 50 
+                                        }   
+                                    }]
+                                }
+                            },  
+                            style: {
+                                height: '200pt'
+                            }
+                        }
+                    )
                 )
             ),             
             React.createElement(
@@ -65,7 +98,7 @@ const Bungalow = ({result}) => {
                     {
                         'data-id': 'overview'
                     },
-                    i18n.t('effort-log')
+                    i18n.t('overview')
                 ),
                 React.createElement(
                     'bungalow-tab',
@@ -86,7 +119,11 @@ const Bungalow = ({result}) => {
                     {
                         className: ''
                     },
-                    
+                    React.createElement(
+                        'h2',
+                        null,
+                        i18n.t('accounts')
+                    ),
                     React.createElement(
                         'table',
                         {
@@ -102,24 +139,14 @@ const Bungalow = ({result}) => {
                                 React.createElement(
                                     'th',
                                     null,
-                                    i18n.t('effort')
-                                ),   
-                                React.createElement(
-                                    'th',
-                                    null,
-                                    i18n.t('time')
+                                    i18n.t('account')
                                 )
                             )
                         ),
                         React.createElement(
-                            'h1',
-                            null,
-                            'Facilities'
-                        ),
-                        React.createElement(
                             'tbody',
                             null,
-                            result.bungalow.facilitySet.map((o, i) => {
+                            result.bungalow.accountSet.map((o, i) => {
                                 return React.createElement(
                                     'tr',
                                     {
@@ -131,24 +158,12 @@ const Bungalow = ({result}) => {
                                         React.createElement(
                                             Link,
                                             {
-                                                to: `/bungalow/facility/${o.id}`
+                                                to: `/bungalow/account/${o.id}`
                                             },
-                                            facility.name
+                                            o.name
                                         )
-                                    ),
-                                    React.createElement(
-                                        'td',
-                                        null,
-                                        React.createElement(
-                                            'span',
-                                            {
-                                                style: {
-                                                    opacity: 0.5
-                                                }
-                                            },
-                                            moment(o.time).fromNow()
-                                        )
-                                    ),
+                                    )
+                                    
                                 )
                             })
                         )

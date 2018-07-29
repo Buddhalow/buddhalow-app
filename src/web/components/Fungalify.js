@@ -15,7 +15,7 @@ const Fungalify = ({result}) => (
             <tbody>
                 {result && result.infections && result.infections.map((infection, i) => (
                     <tr key={i}>
-                        <td><Link to={`/fungal/infection/${infection.id}`}>{infection.name}</Link></td>
+                        <td><Link to={`/fungalify/infection/${infection.id}`}>{infection.name}</Link></td>
                     </tr>
                 ))}
             </tbody>

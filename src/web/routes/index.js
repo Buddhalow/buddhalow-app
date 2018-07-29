@@ -14,8 +14,8 @@ import HousingComponent from '../components/Housing'
 import HousingContainer from '../../containers/Housing'
 import BungalowComponent from '../components/Bungalow'
 import BungalowContainer from '../../containers/Bungalow'
-import BungalowFacilityComponent from '../components/BungalowFacility'
-import BungalowFacilityContainer from '../../containers/BungalowFacility'
+import BungalowAccountComponent from '../components/BungalowAccount'
+import BungalowAccountContainer from '../../containers/BungalowAccount'
 
 import FungalifyComponent from '../components/Fungalify'
 import FungalifyContainer from '../../containers/Fungalify'
@@ -49,6 +49,14 @@ const Index = () => (
         </TemplateSidebar>
       )}
     />
+     <Route
+      path="/fungalify/infection/:id"
+      render={props => (
+        <TemplateSidebar>
+          <FungalInfectionContainer {...props} Layout={FungalInfectionComponent} />
+        </TemplateSidebar>
+      )}
+    />
     <Route
       path="/fungalify"
       render={props => (
@@ -57,27 +65,12 @@ const Index = () => (
         </TemplateSidebar>
       )}
     />
+   
     <Route
-      path="/fungal/infection/:id"
+      path="/bungalow/account/:id"
       render={props => (
         <TemplateSidebar>
-          <FungalInfectionContainer {...props} Layout={FungalInfectionComponent} />
-        </TemplateSidebar>
-      )}
-    />
-    <Route
-      path="/bungalow/facility/:id"
-      render={props => (
-        <TemplateSidebar>
-          <BungalowFacilityContainer {...props} Layout={BungalowFacilityComponent} />
-        </TemplateSidebar>
-      )}
-    />
-    <Route
-      path="/housing"
-      render={props => (
-        <TemplateSidebar>
-          <HousingContainer {...props} Layout={HousingComponent} />
+          <BungalowAccountContainer {...props} Layout={BungalowAccountComponent} />
         </TemplateSidebar>
       )}
     />
@@ -86,6 +79,14 @@ const Index = () => (
       render={props => (
         <TemplateSidebar>
           <BungalowContainer {...props} Layout={BungalowComponent} />
+        </TemplateSidebar>
+      )}
+    />
+    <Route
+      path="/bungalow"
+      render={props => (
+        <TemplateSidebar>
+          <HousingContainer {...props} Layout={HousingComponent} />
         </TemplateSidebar>
       )}
     />

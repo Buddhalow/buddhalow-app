@@ -11,7 +11,20 @@ const GET_NOTIFICATIONS = gql`
            name,
            description,
            time
-       } 
+       },
+       entityStates {
+         id,
+         yin,
+         yang,
+         anxiety,
+         ignition,
+         bowelYin,
+         bowelYang,
+         value,
+         focusness,
+         irritability,
+         time
+       }
     }
 `
 
@@ -26,6 +39,7 @@ class Dashboard extends Component {
     return (
       <Query query={GET_NOTIFICATIONS}>
         {({loading, error, data}) =>  {
+          console.log(data)
           return <Layout data={data} error={error} loading={loading} />
         }}
       </Query>

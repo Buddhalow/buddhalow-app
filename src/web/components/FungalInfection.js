@@ -78,7 +78,7 @@ class FungalTreatmentsList extends React.Component {
                                         {
                                             label: this.label,
                                             borderColor: [this.color || getComputedStyle(document.body).getPropertyValue('--brand-primary')],
-                                            fillColor: 'transparent',
+                                            backgroundColor: 'transparent',
                                             data: result.infection.report.fungaldaySet.map(o => o.balance),
                                         }
                                     ],

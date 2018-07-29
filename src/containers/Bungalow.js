@@ -12,9 +12,26 @@ const GET_BUNGALOW = gql`
             id,
             time,
             name,
-            facilitySet {
+            report {
+                fullfillmentRate,
+                bungalowdaySet {
+                    time,
+                    balance
+                }
+            },
+            accountSet {
+                name,
+                id
+            },
+            transactionSet {
+                time,
+                name,
+                amount,
+                balance
+            },
+            effortSet {
                 id,
-                name
+                time
             }
         }
     }

@@ -6,15 +6,15 @@ import { connect } from 'react-redux';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
-const GET_FACILITY = gql`
-    query getFacility($id: String!) {
-        facility(id: $id) {
+const GET_ACCOUNT = gql`
+    query getAccount($id: String!) {
+        account(id: $id) {
             id,
             time,
             name,
             report {
                 fullfillmentRate,
-                bungalowdaySet {
+                daySet {
                     time,
                     balance
                 }
@@ -33,7 +33,7 @@ const GET_FACILITY = gql`
     }
 `
 
-class Bungalow extends Component {
+class BungalowAccount extends Component {
   static propTypes = {  
     Layout: PropTypes.func.isRequired
   }
@@ -42,7 +42,7 @@ class Bungalow extends Component {
     const { Layout, match } = this.props;
     console.log("TF2")
     return (
-      <Query query={GET_FACILITY} variables={{id: match.params.id}}>
+      <Query query={GET_ACCOUNT} variables={{id: match.params.id}}>
         {({loading, error, data}) =>  {
             console.log(loading, error ,data)
             return <Layout result={data} error={error} loading={loading} />
@@ -58,4 +58,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Bungalow);
+export default connect(mapStateToProps, mapDispatchToProps)(BungalowAccount);

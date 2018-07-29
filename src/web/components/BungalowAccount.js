@@ -8,8 +8,8 @@ let i18n = {
     t: (str) => str
 }
 
-const Bungalow = ({result}) => {
-    if (!result || !result.bungalow) {
+const BungalowAccount = ({result}) => {
+    if (!result || !result.account) {
         return  React.createElement(
             'div',
             {
@@ -40,8 +40,12 @@ const Bungalow = ({result}) => {
                 PageHeader,
                 {
                     object: {
-                        name: result.facility.name,
-                        type: 'facility'
+                        name: result.account.name,
+                        type: 'room',
+                        in: {
+                            id: '',
+                            name: 'getingen'
+                        }
                     }
                 }
             ),
@@ -67,10 +71,10 @@ const Bungalow = ({result}) => {
                                         label: 'Entropy',
                                         borderColor: [getComputedStyle(document.body).getPropertyValue('--brand-primary')],
                                         backgroundColor: 'transparent',
-                                        data: result.facility.transactionSet.map(o => o.balance),
+                                        data: result.account.transactionSet.map(o => o.balance),
                                     }
                                 ],
-                                labels: result.facility.transactionSet.map(o => moment(o.time).format('YYYY-MM-DD'))
+                                labels: result.account.transactionSet.map(o => moment(o.time).format('YYYY-MM-DD'))
                             },
                             options: {
                                 scales: {
@@ -147,7 +151,7 @@ const Bungalow = ({result}) => {
                         React.createElement(
                             'tbody',
                             null,
-                            result.bungalow.effortSet.map((o, i) => {
+                            result.account && result.account.effortSet.map((o, i) => {
                                 return React.createElement(
                                     'tr',
                                     {
@@ -234,7 +238,7 @@ const Bungalow = ({result}) => {
                         React.createElement(
                             'tbody',
                             null,
-                            result.bungalow.transactionSet.map((o, i) => {
+                            result.account.transactionSet.map((o, i) => {
                                 return React.createElement(
                                     'tr',
                                     {
@@ -292,4 +296,4 @@ const Bungalow = ({result}) => {
 }
         
 
-export default Bungalow
+export default BungalowAccount
