@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Content, Form, Item, Label, Input, Text, Button, View } from 'native-base';
+import {
+  Container, Content, Form, Item, Label, Input, Text, Button, View,
+} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Messages from './Messages';
@@ -38,21 +40,21 @@ class Login extends React.Component {
 
   handleChange = (name, val) => {
     this.setState({
-      ...this.state,
       [name]: val,
     });
   }
 
   handleSubmit = () => {
-    this.props.onFormSubmit(this.state)
-      .then(() => {
-        Actions.tabbar()
-        Actions.refresh(true)
-        }).catch(e => console.log(`Error: ${e}`));
+
+    const { onFormSubmit } = this.props;
+    onFormSubmit(this.state)
+      .then(() => Actions.tabbar())
+      .catch(e => console.log(`Error: ${e}`));
   }
 
   render() {
     const { loading, error, locale } = this.props;
+    const { email } = this.state;
 
     if (loading) return <Loading />;
 
@@ -70,16 +72,20 @@ class Login extends React.Component {
 
           <Form>
             <Item stackedLabel>
-              <Label>{translate('Email', locale)}</Label>
+              <Label>
+                {translate('Email', locale)}
+              </Label>
               <Input
                 autoCapitalize="none"
-                value={this.state.email}
+                value={email}
                 keyboardType="email-address"
                 onChangeText={v => this.handleChange('email', v)}
               />
             </Item>
             <Item stackedLabel>
-              <Label>{translate('Password', locale)}</Label>
+              <Label>
+                {translate('Password', locale)}
+              </Label>
               <Input
                 secureTextEntry
                 onChangeText={v => this.handleChange('password', v)}
@@ -90,7 +96,9 @@ class Login extends React.Component {
 
             <View padder>
               <Button block onPress={this.handleSubmit}>
-                <Text>{translate('Login', locale)}</Text>
+                <Text>
+                  {translate('Login', locale)}
+                </Text>
               </Button>
             </View>
           </Form>

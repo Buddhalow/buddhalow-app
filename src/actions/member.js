@@ -88,7 +88,6 @@ export function login(formData) {
     // Validation checks
     if (!email) return reject({ message: ErrorMessages.missingEmail });
     if (!password) return reject({ message: ErrorMessages.missingPassword });
-    
     return buddhalow.logIn(email, password).then(async (res) => {
       await statusMessage(dispatch, 'loading', false);
       console.log(res)
