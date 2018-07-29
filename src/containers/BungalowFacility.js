@@ -6,15 +6,28 @@ import { connect } from 'react-redux';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
-const GET_BUNGALOW = gql`
-    query getBungalow($id: String!) {
-        bungalow(id: $id) {
+const GET_FACILITY = gql`
+    query getFacility($id: String!) {
+        facility(id: $id) {
             id,
             time,
             name,
-            facilitySet {
+            report {
+                fullfillmentRate,
+                bungalowdaySet {
+                    time,
+                    balance
+                }
+            },
+            transactionSet {
+                time,
+                name,
+                amount,
+                balance
+            },
+            effortSet {
                 id,
-                name
+                time
             }
         }
     }
@@ -29,7 +42,7 @@ class Bungalow extends Component {
     const { Layout, match } = this.props;
     console.log("TF2")
     return (
-      <Query query={GET_BUNGALOW} variables={{id: match.params.id}}>
+      <Query query={GET_FACILITY} variables={{id: match.params.id}}>
         {({loading, error, data}) =>  {
             console.log(loading, error ,data)
             return <Layout result={data} error={error} loading={loading} />

@@ -10,7 +10,7 @@
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  background-color: white;
+  background-color: black;
   border-right: 1px solid #eee;
 
   .nav {
@@ -19,16 +19,17 @@
 
   .nav-item {
     width: 100%;
-
     & + .nav-item {
       margin-left: 0;
     }
   }
 
   .nav-link {
-    color: #6A6E74;
+    color: white;
+    opacity: 0.8;
     font-size: 0.9rem;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 2rem;
+    
 
     i {
       font-size: 1.2rem;
@@ -41,10 +42,12 @@
 
     &.active, &:hover {
       color: white;
+      
     }
 
     &.active {
-      background: #141519;
+      opacity: 1;
+      border-left: 3pt solid $primary;
     }
   }
 }

@@ -14,6 +14,13 @@ import HousingComponent from '../components/Housing'
 import HousingContainer from '../../containers/Housing'
 import BungalowComponent from '../components/Bungalow'
 import BungalowContainer from '../../containers/Bungalow'
+import BungalowFacilityComponent from '../components/BungalowFacility'
+import BungalowFacilityContainer from '../../containers/BungalowFacility'
+
+import FungalifyComponent from '../components/Fungalify'
+import FungalifyContainer from '../../containers/Fungalify'
+import FungalInfectionComponent from '../components/FungalInfection'
+import FungalInfectionContainer from '../../containers/FungalInfection'
 
 import SignUpContainer from '../../containers/SignUp';
 import SignUpComponent from '../components/SignUp';
@@ -39,6 +46,30 @@ const Index = () => (
       render={props => (
         <TemplateSidebar>
           <Dashboard {...props} Layout={DashboardComponent} />
+        </TemplateSidebar>
+      )}
+    />
+    <Route
+      path="/fungalify"
+      render={props => (
+        <TemplateSidebar>
+          <FungalifyContainer {...props} Layout={FungalifyComponent} />
+        </TemplateSidebar>
+      )}
+    />
+    <Route
+      path="/fungal/infection/:id"
+      render={props => (
+        <TemplateSidebar>
+          <FungalInfectionContainer {...props} Layout={FungalInfectionComponent} />
+        </TemplateSidebar>
+      )}
+    />
+    <Route
+      path="/bungalow/facility/:id"
+      render={props => (
+        <TemplateSidebar>
+          <BungalowFacilityContainer {...props} Layout={BungalowFacilityComponent} />
         </TemplateSidebar>
       )}
     />

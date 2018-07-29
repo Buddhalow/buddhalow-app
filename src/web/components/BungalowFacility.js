@@ -40,7 +40,8 @@ const Bungalow = ({result}) => {
                 PageHeader,
                 {
                     object: {
-                        name: 'Getingen'
+                        name: result.facility.name,
+                        type: 'facility'
                     }
                 }
             ),
@@ -54,7 +55,39 @@ const Bungalow = ({result}) => {
                     {
                         className: 'container'
                     },
-                    
+                    React.createElement(
+                        Line,
+                        {
+                            min: -280000,
+                            max: 0,
+                            step: 100000,
+                            data: {
+                                datasets: [
+                                    {
+                                        label: 'Entropy',
+                                        borderColor: [getComputedStyle(document.body).getPropertyValue('--brand-primary')],
+                                        backgroundColor: 'transparent',
+                                        data: result.facility.transactionSet.map(o => o.balance),
+                                    }
+                                ],
+                                labels: result.facility.transactionSet.map(o => moment(o.time).format('YYYY-MM-DD'))
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            min: -200,
+                                            max: 0,
+                                            stepSize: 10 
+                                        }   
+                                    }]
+                                }
+                            },  
+                            style: {
+                                height: '200pt'
+                            }
+                        }
+                    )
                 )
             ),             
             React.createElement(
@@ -112,14 +145,9 @@ const Bungalow = ({result}) => {
                             )
                         ),
                         React.createElement(
-                            'h1',
-                            null,
-                            'Facilities'
-                        ),
-                        React.createElement(
                             'tbody',
                             null,
-                            result.bungalow.facilitySet.map((o, i) => {
+                            result.bungalow.effortSet.map((o, i) => {
                                 return React.createElement(
                                     'tr',
                                     {
@@ -128,13 +156,7 @@ const Bungalow = ({result}) => {
                                     React.createElement(
                                         'td',
                                         null,
-                                        React.createElement(
-                                            Link,
-                                            {
-                                                to: `/bungalow/facility/${o.id}`
-                                            },
-                                            facility.name
-                                        )
+                                        o.id
                                     ),
                                     React.createElement(
                                         'td',

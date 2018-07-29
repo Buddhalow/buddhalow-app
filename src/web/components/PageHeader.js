@@ -6,7 +6,7 @@ const PageHeader = ({children, object}) => (
         <div style={{flex: 1, padding: 20}}>
             <h1>{object.name}</h1>
             <p>{object.description}</p>
-            <button className="btn btn-primary">...</button>
+            <button className="btn btn-outline">...</button>
         </div>
     </div>
 )

@@ -1,7 +1,7 @@
 // Override Bootstrap's variables before importing
 
 // Colors
-$purple: #000;
+$purple: #1db954;
 $primary: $purple;
 $body-bg: #fff;
 $body-color: black;
@@ -22,4 +22,9 @@ $font-size: 11px;
 
 .bg-gray {
     background-color: rgba(0, 0, 0, .2);
+}
+.btn {
+    padding-left: 28pt;
+    padding-right: 28pt;
+    border-radius: 28pt;
 }

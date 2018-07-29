@@ -1,26 +1,37 @@
-
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
-const GET_BUNGALOW = gql`
-    query getBungalow($id: String!) {
-        bungalow(id: $id) {
+const GET_FUNGAL_INFECTION = gql`
+    query getInfection($id: String!) {
+        infection(id: $id) {
             id,
             time,
             name,
-            facilitySet {
+            report {
+                fullfillmentRate,
+                fungaldaySet {
+                    time,
+                    balance
+                }
+            },
+            fungaltransactionSet {
+                time,
+                name,
+                amount,
+                balance
+            },
+            fungaltreatmentSet {
                 id,
-                name
+                time
             }
         }
     }
 `
 
-class Bungalow extends Component {
+class FungalInfection extends Component {
   static propTypes = {  
     Layout: PropTypes.func.isRequired
   }
@@ -29,7 +40,7 @@ class Bungalow extends Component {
     const { Layout, match } = this.props;
     console.log("TF2")
     return (
-      <Query query={GET_BUNGALOW} variables={{id: match.params.id}}>
+      <Query query={GET_FUNGAL_INFECTION} variables={{id: match.params.id}}>
         {({loading, error, data}) =>  {
             console.log(loading, error ,data)
             return <Layout result={data} error={error} loading={loading} />
@@ -45,4 +56,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Bungalow);
+export default connect(mapStateToProps, mapDispatchToProps)(FungalInfection);

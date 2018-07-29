@@ -53,7 +53,7 @@ class Sidebar extends React.Component {
     return (
       <div>
         <div>
-          <Col sm="3" md="2" style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}} className="sidebar">
+          <Col sm="2" md="1" style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}} className="sidebar">
             <Nav vertical>
               {SidebarNavItems()}
             </Nav>

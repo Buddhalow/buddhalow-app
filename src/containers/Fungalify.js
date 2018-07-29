@@ -1,35 +1,29 @@
-
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
-const GET_BUNGALOW = gql`
-    query getBungalow($id: String!) {
-        bungalow(id: $id) {
+const GET_FUNGAL_INFECTIONS = gql`
+    query getInfections {
+        infections {
             id,
             time,
-            name,
-            facilitySet {
-                id,
-                name
-            }
+            name
         }
     }
 `
 
-class Bungalow extends Component {
+class Fungalify extends Component {
   static propTypes = {  
     Layout: PropTypes.func.isRequired
   }
 
   render() {
-    const { Layout, match } = this.props;
+    const { Layout } = this.props;
     console.log("TF2")
     return (
-      <Query query={GET_BUNGALOW} variables={{id: match.params.id}}>
+      <Query query={GET_FUNGAL_INFECTIONS}>
         {({loading, error, data}) =>  {
             console.log(loading, error ,data)
             return <Layout result={data} error={error} loading={loading} />
@@ -45,4 +39,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Bungalow);
+export default connect(mapStateToProps, mapDispatchToProps)(Fungalify);
