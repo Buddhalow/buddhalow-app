@@ -48,6 +48,14 @@ switch (PRODUCT) {
             name
           },
           time          
+        },
+        seminations {
+          id,
+          restaurant {
+            id,
+            name
+          },
+          seminated
         }
       }
     `;

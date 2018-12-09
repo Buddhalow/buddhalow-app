@@ -41,15 +41,21 @@ const overrides = {
       height: '100%'
     }
   },
+  MuiCard: {
+    root: {
+      boxShadow: '0pt 1pt 2pt rgba(0, 0, 0, .1)'
+    }
+  },
   MuiInputBase: {
     root: {
-      skeuomorphicInput: skeuomorphicInput(),
+  //    skeuomorphicInput: skeuomorphicInput(),
     },
   },
   MuiAppBar: {
     // Name of the rule
     root: {
-      ...skeuomorphicPrimary(),
+    //  ...skeuomorphicPrimary(),
+    boxShadow: 'none'
     },
   },
 };

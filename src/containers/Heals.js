@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import Loading from '../native/components/Loading';
-import Error from '../native/components/Error';
+import { setHeaderImageUrl } from '../actions/ui';
 
 const GET_HEALS = gql`
     query getHeals {
@@ -21,12 +20,13 @@ class Heals extends Component {
   }
 
   render() {
-    const { Layout } = this.props;
+    const { Layout, setHeaderImageUrl } = this.props;
+    setHeaderImageUrl('https://cdn.buddhalow.com/salad.jpg');
     console.log("TF2")
     return (
       <Query query={GET_HEALS}>
         {({loading, error, data}) =>  {
-          return <Layout data={data} error={error} loading={loading} />
+          return <Layout data={data} error={error} setHeaderImageUrl={setHeaderImageUrl} loading={loading} />
         }}
       </Query>
     )
@@ -37,6 +37,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  setHeaderImageUrl,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Heals);

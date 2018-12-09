@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { skeuomorphicPrimary } from '../theme';
+import { PRIMARY_COLOR, SECONDARY_COLOR } from '../config.js';
 
 
 const DrawerHeader = ({ children }) => (
-  <div style={{ width: '228pt', ...skeuomorphicPrimary(), flexDirection: 'column', justifyContent: 'flex-end' }}>
+  <div style={{ width: '228pt', background: `linear-gradient(90deg, ${PRIMARY_COLOR}, ${SECONDARY_COLOR})`, flexDirection: 'column', justifyContent: 'flex-end' }}>
     {children}
   </div>
 );

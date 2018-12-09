@@ -17,9 +17,17 @@ import ListItem from '@material-ui/core/ListItem/ListItem';
 import ListItemText from '@material-ui/core/ListItemText/ListItemText';
 import Icon from '@material-ui/core/Icon/Icon';
 import Fab from '@material-ui/core/Fab/Fab';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import moment from 'moment';
 import Avatar from '@material-ui/core/Avatar/Avatar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { translate } from '../../i18n';
+import { setHeaderImageUrl } from '../../actions/ui';
 
 console.log('PRODUCT', PRODUCT === 'cravity');
 
@@ -39,22 +47,51 @@ const Dashboard = ({ data }) => (
               title="Recent pitchs"
             />
             <CardContent>
-            {data.pitchs ? data.pitchs.slice(0, 5).map(row => (
+              <List>
+                {data.pitchs && data.pitchs.length > 0 ? data.pitchs.slice(0, 5).map(row => (
                   <ListItem component={Link} to={`/dashboard/pitch/${row.id}`} button key={row.id}>
                     <Avatar>
                       <Icon>fastfood</Icon>
                     </Avatar>
                     <ListItemText primary={row.food.name} secondary={moment(row.time).fromNow()} />
                   </ListItem>
-                )) : <div />}
-                <ListItem component={Link} to="/dashboard/pitches">
-                  <Avatar>
-                    <Icon>fastfood</Icon>
-                  </Avatar>
+                  )) : <div />}
+                  <ListItem component={Link} to="/dashboard/pitches">
+                    <Avatar>
+                      <Icon>fastfood</Icon>
+                    </Avatar>
+                    <ListItemText primary={translate('ShowAll')} />
+                  </ListItem>
+                </List>
+              </CardContent>
+          </Card>
+        </Grid> : <CircularProgress />
+      }
+
+      {PRODUCT === 'cravity' ?
+        <Grid item xs={12} md={12}>
+          <Card>
+            <CardHeader
+              title="Recent seminations"
+              subheader="Successful avoidance of craving strikes"
+            />
+            <CardContent>
+              <List>
+                {data.seminations ? data.seminations.slice(0, 5).map(row => (
+                  <ListItem component={Link} to={`/dashboard/semination/${row.id}`} button key={row.id}>
+                    <Avatar>
+                      <Icon>star</Icon>
+                    </Avatar>
+                    <ListItemText primary={row.restaurant && row.restaurant.name} secondary={moment(row.time).fromNow()} />
+                  </ListItem>
+                )) : <CircularProgress />}
+                <ListItem component={Link} to="/dashboard/seminations">
                   <ListItemText primary={translate('ShowAll')} />
                 </ListItem>
+              </List>
+            </CardContent>
           </Card>
-        </Grid> : null
+        </Grid> : <CircularProgress />
       }
 
       {PRODUCT === 'cravity' ?
@@ -72,7 +109,7 @@ const Dashboard = ({ data }) => (
                     </Avatar>
                     <ListItemText primary={row.food.name} secondary={moment(row.time).fromNow()} />
                   </ListItem>
-                )) : <div />}
+                )) : <CircularProgress />}
                 <ListItem component={Link} to="/dashboard/cravings">
                   <Avatar>
                     <Icon>fastfood</Icon>
@@ -82,14 +119,14 @@ const Dashboard = ({ data }) => (
               </List>
             </CardContent>
           </Card>
-        </Grid> : null
+        </Grid> : <CircularProgress />
       }
       {PRODUCT === 'cravity' ?
         <Fab style={{ position: 'fixed', right: '23pt', bottom: '23pt' }} color="primary" aria-label="Add">
           <Icon>add</Icon>
         </Fab> : null
       }
-    </Grid> : <div />
+    </Grid> : <CircularProgress />
 );
 
 Dashboard.propTypes = {
