@@ -20,7 +20,6 @@
     "node-sass": "^4.8.3",
     "react-native-dotenv": "^0.1.1",
     "react-native-scripts": "1.13.2",
-
     "react-test-renderer": "16.3.2",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
@@ -52,6 +51,8 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^6.3.1",
+    "@material-ui/core": "^3.6.1",
+    "@material-ui/icons": "^3.0.1",
     "apollo-cache-inmemory": "^1.2.2",
     "apollo-client": "^2.3.2",
     "apollo-link-context": "^1.0.8",
@@ -64,7 +65,6 @@
     "chart.js": "^2.7.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
-
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.7.0",
@@ -74,7 +74,6 @@
     "graphql-tag": "^2.9.2",
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
-
     "morgan": "^1.9.0",
     "native-base": "^2.4.2",
     "numeral": "^2.0.6",
@@ -82,7 +81,7 @@
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^11.1.0",
     "prop-types": "^15.6.1",
-    "react": "^16.3.2",
+    "react": "^16.5.2",
     "react-apollo": "^2.1.4",
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.3.2",

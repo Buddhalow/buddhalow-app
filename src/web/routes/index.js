@@ -65,9 +65,9 @@ const Index = () => (
         </TemplateSidebar>
       )}
     />
-   
+
     <Route
-      path="/bungalow/account/:id"
+      path="/buddhaloan/account/:id"
       render={props => (
         <TemplateSidebar>
           <BungalowAccountContainer {...props} Layout={BungalowAccountComponent} />

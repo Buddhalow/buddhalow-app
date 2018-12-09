@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import moment from "moment";
 
 const GET_ACCOUNT = gql`
     query getAccount($id: String!) {
@@ -12,12 +13,9 @@ const GET_ACCOUNT = gql`
             id,
             time,
             name,
-            report {
-                fullfillmentRate,
-                daySet {
-                    time,
-                    balance
-                }
+            days {
+              time,
+              balance
             },
             transactionSet {
                 time,
@@ -34,7 +32,7 @@ const GET_ACCOUNT = gql`
 `
 
 class BungalowAccount extends Component {
-  static propTypes = {  
+  static propTypes = {
     Layout: PropTypes.func.isRequired
   }
 
@@ -42,7 +40,7 @@ class BungalowAccount extends Component {
     const { Layout, match } = this.props;
     console.log("TF2")
     return (
-      <Query query={GET_ACCOUNT} variables={{id: match.params.id}}>
+      <Query query={GET_ACCOUNT} variables={{id: match.params.id, start: match.params.start || moment().subtract(7, 'day').format('YYYY-MM-DD'), end: match.params.end || moment().format('YYYY-MM-DD')}}>
         {({loading, error, data}) =>  {
             console.log(loading, error ,data)
             return <Layout result={data} error={error} loading={loading} />

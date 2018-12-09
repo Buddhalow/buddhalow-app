@@ -1,12 +1,14 @@
 /* global window */
 import React from 'react';
-import { Col,
-  Nav, 
+import {
+  Col,
+  Nav,
   NavItem,
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
-  UncontrolledDropdown, } from 'reactstrap';
+  UncontrolledDropdown,
+} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -32,7 +34,6 @@ const SidebarNavItems = () => (
 
 
 class Sidebar extends React.Component {
-
   static defaultProps = {
     member: {},
   }
@@ -45,19 +46,19 @@ class Sidebar extends React.Component {
   }
 
   onLogout = () => this.props.logout().then(() => this.props.history.push('/login'));
-  
+
   toggleDropDown = () => this.setState({ isOpen: !this.state.isOpen });
-  
+
   render() {
-    let {member, loggedIn } = this.props
+    const { member, loggedIn } = this.props;
     return (
       <div>
         <div>
-          <Col sm="2" md="1" style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}} className="sidebar">
+          <Col sm="2" md="1" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} className="sidebar">
             <Nav vertical>
               {SidebarNavItems()}
             </Nav>
-            <div style={{flex: 2}}></div>
+            <div style={{ flex: 2 }} />
             <div>
               <UncontrolledDropdown nav>
                 <DropdownToggle nav caret>
@@ -91,7 +92,7 @@ class Sidebar extends React.Component {
           </Col>
         </div>
       </div>
-    )
+    );
   }
 }
 
