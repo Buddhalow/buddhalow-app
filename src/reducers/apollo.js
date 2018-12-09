@@ -1,3 +1,5 @@
-import client from '../lib/buddhalow'
+const initialState = {};
 
-export default client.reducer()
+export default function colorReducer(state = initialState, action) {
+  return state;
+}

@@ -4,7 +4,7 @@ import { skeuomorphicPrimary } from '../theme';
 
 
 const DrawerHeader = ({ children }) => (
-  <div style={{ width: '228pt', ...skeuomorphicPrimary, flexDirection: 'column', justifyContent: 'flex-end' }}>
+  <div style={{ width: '228pt', ...skeuomorphicPrimary(), flexDirection: 'column', justifyContent: 'flex-end' }}>
     {children}
   </div>
 );

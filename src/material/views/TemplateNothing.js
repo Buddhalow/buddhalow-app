@@ -11,30 +11,37 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
-import { PRIMARY_COLOR, SECONDARY_COLOR } from "../config";
+import { PRIMARY_COLOR, SECONDARY_COLOR } from '../config';
 
 import theme from '../theme/index';
-import DrawerHeader from "../components/DrawerHeader";
-import Avatar from "@material-ui/core/Avatar/Avatar";
+import DrawerHeader from '../components/DrawerHeader';
+import Avatar from '@material-ui/core/Avatar/Avatar';
+import {connect} from "react-redux";
+import {colorize} from "../../actions/colors";
 
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 
 class TemplateSidebar extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
     };
   }
   componentDidMount() {
     const style = document.createElement('style');
     style.innerHTML = 'body, html { padding: 0pt; margin: 0pt; height: 100%} body { background-color: #eee}';
     document.head.appendChild(style);
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('href', 'https://fonts.googleapis.com/icon?family=Material+Icons');
+    document.head.appendChild(link);
+    document.querySelector('#root').style.height = '100%';
+    document.querySelector('#root').style.display = 'flex';
   }
   toggleDrawer = (open) => {
     this.setState({
@@ -57,4 +64,11 @@ TemplateSidebar.propTypes = {
   children: PropTypes.shape().isRequired,
 };
 
-export default TemplateSidebar;
+const mapStateToProps = state => ({
+  member: state.member,
+});
+const mapDispatchToProps = {
+  colorize,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TemplateSidebar);

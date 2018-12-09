@@ -1,19 +1,29 @@
 {
   "presets": ["babel-preset-expo", "react-native-dotenv"],
-  "plugins": [
-    ["conditional-compilation", {
-      "DEBUG": 2,
-      "PRODUCT": "cravity"
-    }]
-  ],
   "env": {
     "development": {
-      "plugins": [
+      "plugins": ["transform-react-jsx-source",
+        [
+          "conditional-compilation",
+          {
+            "DEBUG": 2,
+            "PRODUCT": "celebrify"
+          }
+        ]
+      ]
+    },
+    "production": {
+      "plguins":  [
         ["conditional-compilation", {
-          "DEBUG": 2,
-          "PRODUCT": "cravity"
+        "DEBUG": 2,
+        "PRODUCT": "celebrify"
         }],
-        "transform-react-jsx-source"
+        "transform-runtime",
+        "transform-react-jsx-source",
+        {
+          "polyfill": false,
+          "regenerator": true
+        }
       ]
     }
   }

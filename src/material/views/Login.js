@@ -1,20 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid/Grid';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button/Button';
 import {
-  Row,
-  Col,
-  Card,
   Form,
-  Label,
   Alert,
-  Input,
-  Button,
-  CardBody,
   FormGroup,
-  CardHeader,
 } from 'reactstrap';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Loading from '../components/Loading';
+import Card from "@material-ui/core/Card/Card";
+import CardHeader from "@material-ui/core/CardHeader/CardHeader";
+import CardContent from "@material-ui/core/CardContent/CardContent";
 
 class Login extends React.Component {
   static propTypes = {
@@ -58,7 +56,6 @@ class Login extends React.Component {
       .then(() => history.push('/dashboard'))
       .catch(e => console.log(`Error: ${e}`));
   }
-
   render() {
     const { loading, error } = this.props;
     const { email, password } = this.state;
@@ -67,72 +64,52 @@ class Login extends React.Component {
     if (loading) return <Loading />;
 
     return (
-      <div>
-        <Row>
-          <Col lg={{ size: 6, offset: 3 }}>
-            <Card>
-              <CardHeader>
-                Login
-              </CardHeader>
-              <CardBody>
-                {!!error && (
-                  <Alert color="danger">
-                    {error}
-                  </Alert>
-                )}
-                <Form onSubmit={this.handleSubmit}>
-                  <FormGroup>
-                    <Label for="email">
-                      Email
-                    </Label>
-                    <Input
-                      type="text"
-                      name="email"
-                      id="email"
-                      placeholder="john@doe.corp"
-                      value={email}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="password">
-                      Password
-                    </Label>
-                    <Input
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="••••••••"
-                      value={password}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <Button color="primary">
-                    Login
-                  </Button>
-                </Form>
-
-                <hr />
-
-                <Row>
-                  <Col sm="6">
-                    Need an account?
-                    {' '}
-                    <Link to="/sign-up">
-                      Sign Up
-                    </Link>
-                  </Col>
-                  <Col sm="6" className="text-right">
-                    <Link to="/forgot-password">
-                      Forgot Password?
-                    </Link>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid item>
+          <Card>
+            <CardHeader>
+              Login
+            </CardHeader>
+            <CardContent>
+              {!!error && (
+                <Alert color="danger">
+                  {error}
+                </Alert>
+              )}
+              <Form onSubmit={this.handleSubmit}>
+                <FormGroup>
+                  <Input
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="john@doe.corp"
+                    value={email}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+                <Button variant="contained" color="primary" onClick={this.handleSubmit}>
+                  Login
+                </Button>
+              </Form>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
     );
   }
 }

@@ -4,7 +4,7 @@ import { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 
-import { CLIENT_ID, CLIENT_SECRET, GRAPH_API_URL, API_ENDPOINT } from 'react-native-dotenv';
+import { CLIENT_ID, CLIENT_SECRET, GRAPH_API_URL, API_ENDPOINT } from '../conf';
 
 import { AsyncStorage } from '../storage';
 

@@ -8,7 +8,7 @@ You could also extend the `/src/lib/analytics.js` middleware to include other tr
 
 ### Step 1. Google Analytics tracking code
 
-Setup your Google Analytics account and simply paste the tracking code to into the `gaTrackingId` variable in `/src/constants/config.js`
+Setup your Google Analytics account and simply paste the tracking code to into the `gaTrackingId` variable in `/src/constants/conf.js`
 
 FYI you can have separate tracking codes for debug (to test tracking when your developing in debug mode) and production.
 

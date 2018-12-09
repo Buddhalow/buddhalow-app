@@ -1,0 +1,10 @@
+{
+  "id": "buddhalow",
+  "name": "Buddhalow",
+  "short_name": "buddhalow",
+  "brand": {
+    "primary": "#F48FB1",
+    "tertiary": "#ef5350",
+    "secondary": "#B39DDB"
+  }
+}

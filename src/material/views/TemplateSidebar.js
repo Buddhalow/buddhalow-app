@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -12,17 +11,19 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import { PRIMARY_COLOR, SECONDARY_COLOR } from '../config';
-
-import theme from '../theme/index';
-import DrawerHeader from '../components/DrawerHeader';
 import Avatar from '@material-ui/core/Avatar/Avatar';
 import { Link } from 'react-router-dom';
 import Icon from '@material-ui/core/Icon';
 import { withStyles } from '@material-ui/core';
-import InputBase from "@material-ui/core/InputBase/InputBase";
-import {fade} from "@material-ui/core/styles/colorManipulator";
+import InputBase from '@material-ui/core/InputBase/InputBase';
+import { fade } from '@material-ui/core/styles/colorManipulator';
+import { connect } from 'react-redux';
+import { PRODUCT } from 'react-native-dotenv';
 
+
+import { colorize } from '../../actions/colors';
+import theme from '../theme/index';
+import DrawerHeader from '../components/DrawerHeader';
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -50,7 +51,7 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-      boxShadow: 'inset 0pt 0pt 1pt rgba(0, 0, 0, .9), 0pt 0pt 1pt rgba(255, 255, 255, .9)',
+    boxShadow: 'inset 0pt 0pt 1pt rgba(0, 0, 0, .9), 0pt 0pt 1pt rgba(255, 255, 255, .9)',
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -96,12 +97,14 @@ class TemplateSidebar extends React.Component {
   }
   componentDidMount() {
     const style = document.createElement('style');
-    style.innerHTML = 'body, html { padding: 0pt; margin: 0pt; height: 100%} body { background-color: #eee}';
+    style.innerHTML = 'body, html { padding: 0pt; margin: 0pt; height: 100%} body { background-color: #eee} main { width: 100%; display: flex}';
     document.head.appendChild(style);
-    let link = document.createElement('link')
+    const link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('href', 'https://fonts.googleapis.com/icon?family=Material+Icons');
     document.head.appendChild(link);
+    document.querySelector('#root').style.display = 'flex';
+    document.querySelector('#root').style.height = '100%';
   }
   toggleDrawer = (open) => {
     this.setState({
@@ -109,7 +112,8 @@ class TemplateSidebar extends React.Component {
     });
   }
   render = () => {
-    const { children, classes } = this.props;
+    const { children, classes, colorize } = this.props;
+    console.log('CHILDREN', children);
     const { open } = this.state;
     console.log(this.state);
     return (
@@ -140,6 +144,9 @@ class TemplateSidebar extends React.Component {
               </div>
               <Button component={Link} to="/dashboard/notifications">
                 <Icon>notifications</Icon>
+              </Button>
+              <Button onClick={() => colorize()}>
+                <Icon>brush</Icon>
               </Button>
               <Button component={Link} to="/dashboard/account">
                 <Icon>person</Icon>
@@ -172,12 +179,17 @@ flexDirection: 'row', display: 'flex', alignItems: 'flex-end', padding: '20pt',
                 </div>
               </DrawerHeader>
               <List>
-                {['Dashboard'].map((text, index) => (
-                  <ListItem button key={text}>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                  ))}
+                <ListItem button component={Link} to="/dashboard">
+                  <ListItemText primary="Dashboard" />
+                </ListItem>
               </List>
+              {PRODUCT === 'cravity' ?
+                <List>
+                  <ListItem button component={Link} to="/dashboard/cravings">
+                    <ListItemText primary="Cravings" />
+                  </ListItem>
+                </List> : null
+              }
             </div>
           </SwipeableDrawer>
         </header>
@@ -192,5 +204,11 @@ flexDirection: 'row', display: 'flex', alignItems: 'flex-end', padding: '20pt',
 TemplateSidebar.propTypes = {
   children: PropTypes.shape().isRequired,
 };
+const mapStateToProps = state => ({
+  member: state.member,
+});
+const mapDispatchToProps = {
+  colorize,
+};
 
-export default withStyles(styles)(TemplateSidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TemplateSidebar));
