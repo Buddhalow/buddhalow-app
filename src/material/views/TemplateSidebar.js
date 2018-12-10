@@ -104,7 +104,7 @@ class TemplateSidebar extends React.Component {
       });
     })
     const style = document.createElement('style');
-    style.innerHTML = 'body, html { padding: 0pt; margin: 0pt; height: 100%} header {z-index: 1000} body { background-color: #eee} main { width: 100%; display: flex; z-index: 1}';
+    style.innerHTML = 'body, html { padding: 0pt; margin: 0pt; height: 100%} header {z-index: 1000} body { background-color: #eee} main { width: 100%; display: flex; z-index: 1} @media screen and (min-width: 798px) { .appBar { padding-left: 10%; padding-right: 10%;}}';
     document.head.appendChild(style);
     const link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
@@ -120,17 +120,18 @@ class TemplateSidebar extends React.Component {
   }
   render = () => {
     const { children, classes, colorize, ui } = this.props;
+    console.log("")
     console.log('CHILDREN', children);
     const { open } = this.state;
     console.log(this.state);
     return (
       <MuiThemeProvider theme={theme}>
-        <OverBackdrop style={{height: '320pt'}} source={{uri: ui.headerImageUrl}} />
+        <OverBackdrop style={{height: '320pt'}} opacity={1 - this.state.fadeHeader} source={{uri: ui.headerImageUrl}} />
         <header style={{
  padding: '0pt', position: 'fixed', top: '0pt', width: '100%',
 }}
         >
-          <AppBar position="static" style={{backgroundColor: fade(PRIMARY_COLOR, this.state.fadeHeader), boxShadow: '0pt 1pt 2pt rgba(0, 0, 0, ' + this.state.fadeHeader * 0.2 + ')'}}>
+          <AppBar className="appBar" position="static" style={{backgroundColor: fade(PRIMARY_COLOR, this.state.fadeHeader), boxShadow: '0pt 1pt 2pt rgba(0, 0, 0, 0)'}}>
             <Toolbar>
               <IconButton onClick={() => this.toggleDrawer(true)} color="inherit" aria-label="Menu">
                 <MenuIcon />

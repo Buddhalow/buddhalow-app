@@ -11,6 +11,8 @@ import DashboardView from '../views/Dashboard';
 import Dashboard from '../../containers/Dashboard';
 import SeminationsView from '../views/Seminations';
 import Seminations from '../../containers/Seminations';
+import NotificationsView from '../views/Notifications';
+import Notifications from '../../containers/Notifications'
 import CravingsView from '../views/Cravings';
 import Cravings from '../../containers/Cravings';
 import HealsView from '../views/Heals';
@@ -49,12 +51,23 @@ const Index = () => (
         </TemplateSidebar>
       )}
     />
+
     <Route
       exact
-      path="/dashboard/heals"
+      path="/dashboard/healings"
       render={props => (
         <TemplateSidebar>
           <Heals {...props} Layout={HealsView} />
+        </TemplateSidebar>
+      )}
+    />
+
+    <Route
+      exact
+      path="/dashboard/notifications"
+      render={props => (
+        <TemplateSidebar>
+          <Notifications {...props} Layout={NotificationsView} />
         </TemplateSidebar>
       )}
     />

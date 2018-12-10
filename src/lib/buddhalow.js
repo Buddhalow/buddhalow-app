@@ -3,6 +3,7 @@ import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
+import { ApolloLink } from 'apollo-link';
 
 import { CLIENT_ID, CLIENT_SECRET, GRAPH_API_URL, API_ENDPOINT } from '../conf';
 
@@ -101,20 +102,22 @@ const authLink = setContext(async (_, { headers }) => {
   }
 });
 
-const link = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path }) =>
       console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`));
   }
-
   if (networkError) console.log(`[Network error]: ${networkError}`);
+  if (networkError.statusCode == 403) {
+    window.location.href = '/login';
+  }
 });
 
 export const buddhalow = new Buddhalow();
 
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: ApolloLink.from([authLink, errorLink, httpLink]),
   cache: new InMemoryCache(),
 });
 

@@ -43,7 +43,7 @@ const overrides = {
   },
   MuiCard: {
     root: {
-      boxShadow: '0pt 1pt 2pt rgba(0, 0, 0, .1)'
+      boxShadow: '0pt 1pt 12pt rgba(0, 0, 0, .1)'
     }
   },
   MuiInputBase: {

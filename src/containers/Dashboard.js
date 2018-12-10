@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router-dom';
+import { setHeaderImageUrl } from '../actions/ui';
 
 import { PRODUCT } from 'react-native-dotenv';
 
@@ -14,24 +15,28 @@ let GET_DASHBOARD = gql`
            name,
            description,
            time
-       },
-       entityStates {
-         id,
-         yin,
-         yang,
-         anxiety,
-         ignition,
-         bowelYin,
-         bowelYang,
-         value,
-         focusness,
-         irritability,
-         time
        }
     }
 `;
 
 switch (PRODUCT) {
+  case 'buddhalow':
+    GET_DASHBOARD = gql`
+      query getNotifications {
+         notifications {
+             id,
+             name,
+             description,
+             time
+         },
+         entityStates {
+            time,
+            yin,
+            yang
+         }
+      }
+    `;
+    break;
   case 'cravity':
     GET_DASHBOARD = gql`
       query getDashboard {
@@ -47,7 +52,11 @@ switch (PRODUCT) {
             id,
             name
           },
-          time          
+          time,
+          reason {
+            id,
+            name
+          }
         },
         seminations {
           id,
@@ -56,6 +65,15 @@ switch (PRODUCT) {
             name
           },
           seminated
+        },
+        statistics {
+          cravings,
+          date,
+          healings,
+          seminations,
+        },
+        summary {
+          costs
         }
       }
     `;
@@ -68,27 +86,45 @@ switch (PRODUCT) {
           name,
           description,
           time
-        }
+        },
         opportunities {
-          name,
-          description,
-          time,
+          pitch {
+            name,
+            channel {
+              id
+            }
+          },
+          created,
           status
         },
         exposures {
-          name,
-          description,
-          time,
-          status
+          id,
+          opportunity {
+            id,
+            pitch {
+              id,
+              name,
+              channel {
+                id
+              }
+            }
+          }
         },
-        pitchs {
+        pitches {
           id,
           name,
-          time
+          pitched,
+          channel {
+            id
+          }
         },
         channels {
-          id,
-          type
+          id
+        },
+        summary {
+          pitches,
+          reach,
+          exposures
         }
       }
     `;
@@ -103,11 +139,12 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { Layout, member } = this.props;
+    const { Layout, member, setHeaderImageUrl } = this.props;
     console.log('TF2');
     if (!localStorage.getItem('@Buddhalow:session')) {
       return <Redirect to="/login" />;
     }
+    setHeaderImageUrl('');  
     return (
       <Query query={GET_DASHBOARD}>
         {({ loading, error, data }) => {
@@ -124,6 +161,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  setHeaderImageUrl
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

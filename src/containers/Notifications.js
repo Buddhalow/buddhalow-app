@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import Loading from '../native/components/Loading';
-import Error from '../native/components/Error';
 
 import { PRODUCT } from 'react-native-dotenv'
 

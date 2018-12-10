@@ -1,4 +1,5 @@
-export const PRODUCT = 'cravity';
+import { PRODUCT } from 'react-native-dotenv';
+
 export const API_ENDPOINT = 'https://graph.buddhalow.app';
 export const GRAPH_API_URL = `https://graph.buddhalow.app/${PRODUCT}/graphql`;
 export const CALLBACK_URL = 'https://graph.buddhalow.app/callback';

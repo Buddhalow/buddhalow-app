@@ -3,7 +3,7 @@ import italian from './it';
 
 import {sprintf} from 'sprintf-js'
 export const Translations = {
-  en: english,
+  en: english
 };
 
 const getNavigatorLanguage = () => {

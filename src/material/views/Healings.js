@@ -15,7 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-const Seminations = ({ data }) => (
+const Healins = ({ data }) => (
 	data ?
 	<Grid
       direction="row"
@@ -27,27 +27,23 @@ const Seminations = ({ data }) => (
     	<Grid item md={12}>
 			<Card>
 			    <CardHeader
-			      title="Cravings"
+			      title="Healings"
 			    />
 			    <CardContent>
 			    	{data.cravings && data.cravings instanceof Array ?
 			    		<Table>
 				    		<TableHead>
 				    			<TableRow>
-					    			<TableCell></TableCell>
 					    			<TableCell>Location</TableCell>
 					    			<TableCell>Reason</TableCell>
-					    			<TableCell>Craved</TableCell>
+					    			<TableCell>Healed</TableCell>
 				    			</TableRow>
 				    		</TableHead>
 				    		<TableBody>
 				    		{data.cravings.length > 0 ? data.cravings.map(row => (
 				    			<TableRow>
 				    				<TableCell>
-				    				</TableCell>
-				    				<TableCell>
-				    					
-				    					<Icon>fastfood</Icon>{row.restaurant ? <Button color="primary" component={Link} to={`/dashboard/restaurant/${row.id}`}>{row.restaurant.name}</Button> : <span>-</span>}
+				    					<Icon>heart</Icon>{row.restaurant ? <Button color="primary" component={Link} to={`/dashboard/restaurant/${row.id}`}>{row.restaurant.name}</Button> : <span>-</span>}
 				    				</TableCell>
 				    				<TableCell>
 				    					{row.reason ? <Button component={Link} to={`/dashboard/reason/${row.id}`}>{row.reason.name}</Button> : <span>-</span>}
@@ -56,7 +52,7 @@ const Seminations = ({ data }) => (
 				    					{moment(row.time).fromNow()}
 				    				</TableCell>
 				    			</TableRow>
-				    		)): <p>No cravings found</p>}
+				    		)): <p>No healings found</p>}
 				    		</TableBody>
 				    	</Table>
 				    : 	<CircularProgress />}
@@ -66,4 +62,4 @@ const Seminations = ({ data }) => (
 	</Grid> : <CircularProgress />
 )
 
-export default Seminations;
+export default Healings;
