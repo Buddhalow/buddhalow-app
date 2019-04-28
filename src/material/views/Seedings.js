@@ -29,25 +29,25 @@ const Seedings = ({ data }) => (
             title="Seedings"
           />
           <CardContent>
-            {data.seminations && data.seminations instanceof Array ?
+            {data.seedings && data.seedings instanceof Array ?
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell>Location</TableCell>
-                    <TableCell>Seminated</TableCell>
+                    <TableCell>Seeded</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data.seminations.length > 0 ? data.seminations.map(row => (
+                  {data.seedings.length > 0 ? data.seedings.map(row => (
                     <TableRow>
                       <TableCell>
                         {row.restaurant && <Button component={Link} to={`/dashboard/restaurant/${row.id}`}>{row.restaurant.name}</Button>}
                       </TableCell>
                       <TableCell>
-                        {moment(row.seminated).fromNow()}
+                        {moment(row.seeded).fromNow()}
                       </TableCell>
                     </TableRow>
-				    		  )) : <p>No seminations found</p>}
+				    		  )) : <p>No seedings found</p>}
                 </TableBody>
               </Table>
 				    : <CircularProgress />}

@@ -6,5 +6,7 @@
     "icon": "src/images/app-icon.png",
     "privacy": "unlisted",
     "scheme": "buddhalow"
-  }
+  },
+  "name": "Buddhalow",
+  "displayName": "Buddhalow"
 }

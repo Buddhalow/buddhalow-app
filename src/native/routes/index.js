@@ -2,24 +2,19 @@ import React from 'react';
 import { Scene, Tabs, Stack, Modal } from 'react-native-router-flux';
 import { Icon } from 'native-base';
 
-import { PRODUCT } from 'react-native-dotenv'
 import DefaultProps from '../constants/navigation';
-import AppConfig from '../../constants/config';
 
 
 import NotificationsContainer from '../../containers/Notifications';
 import NotificationsComponent from '../components/Notifications';
-import NotificationContainer from '../../containers/Notification';
-import NotificationComponent from '../components/Notification';
 
-import ArchievementsContainer from '../../containers/Archievements';
-import ArchievementsComponent from '../components/Archievements';
-
+import AchievementsContainer from '../../containers/Achievements';
+import AchievementsComponent from '../components/Achievements';
 
 // Produt cravity
-import AddHealComponent from '../components/AddHeal'
-import HealsComponent from '../components/Heals'
-import HealsContainer from '../../containers/Heals'
+import AddHealComponent from '../components/AddHeal';
+import HealsComponent from '../components/Heals';
+import HealsContainer from '../../containers/Heals';
 // End Product cravity
 import SignUpContainer from '../../containers/SignUp';
 import SignUpComponent from '../components/SignUp';
@@ -37,18 +32,18 @@ import UpdateProfileContainer from '../../containers/UpdateProfile';
 import UpdateProfileComponent from '../components/UpdateProfile';
 
 import MemberContainer from '../../containers/Member';
-import ProfileComponent from '../components/Profile';
+import ProfileScreen from '../screens/ProfileScreen';
+import ParticipationsScreen from '../screens/ParticipationsScreen';
+import ParticipationsContainer from '../../containers/ParticipationsContainer';
 
-import AboutComponent from '../components/About';
-
-const Index = (
+const Index = product => (
   <Modal>
     <Scene hideNavBar key="root">
       <Tabs
         key="tabbar"
-        swipeEnabled 
+        swipeEnabled
         type="replace"
-        showLabel={true}
+        showLabel
         {...DefaultProps.tabProps}
       >
         <Stack
@@ -56,73 +51,92 @@ const Index = (
           title="FEED"
           icon={() => <Icon name="star" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
-          
+
         >
-          <Scene key="notifications" path={'/feed'} component={NotificationsContainer} Layout={NotificationsComponent} />
+          <Scene key="notifications" path="/feed" component={NotificationsContainer} Layout={NotificationsComponent} />
         </Stack>
         <Stack
-          key="archievements"
-          title="ARCHIEVEMENTS"
+          key="achievements"
+          title="ACHIEVEMENTS"
           icon={() => <Icon name="star" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="archievements" path={'/archievement/:id'} component={ArchievementsContainer} Layout={ArchievementsComponent} />
+          <Scene key="achievements" path="'/achievement/:id" component={AchievementsContainer} Layout={AchievementsComponent} />
         </Stack>
-{(PRODUCT == 'cravity' && [
-        <Stack
-          key="addHeal"
-          title="ADD HEAL"
-          icon={() => <Icon name="star" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene key="addHeal" path={'/heal'} component={AddHealComponent} />
-        </Stack>,
-        <Stack
-        key="heals"
-        title="HEALS"
-        icon={() => <Icon name="contact" path={'/heals'}  {...DefaultProps.icons} />}
-        {...DefaultProps.navbarProps}
-      >
-        <Scene key="heals" component={HealsContainer} Layout={HealsComponent} />
-      </Stack>
-]) || (PRODUCT == 'aquafulness' && [
-        <Stack 
-          key="intervene"
-          title="INTERVENE"
-          backgroundColor="#eee"
-          tabStyle={{backgroundColor: '#ddd'}}
-          icon={() => <Icon name="contact" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}>
-          <Scene key="heals" path={'/intervene'}  component={HealsContainer} Layout={HealsComponent} />
-        </Stack>,
-        <Stack
-      key="seeds"
-      title="SEEDS"
-      icon={() => <Icon name="contact" {...DefaultProps.icons} />}
-      {...DefaultProps.navbarProps}>
-      <Scene key="seeds" component={HealsContainer} Layout={HealsComponent} />
-      </Stack>
-  
-]
-) || (PRODUCT == 'bathing') && [
-      <Stack 
-        key="intervene"
-        title="INTERVENE"
-        backgroundColor="#eee"
-        tabStyle={{backgroundColor: '#ddd'}}
-        icon={() => <Icon name="contact" {...DefaultProps.icons} />}
-        {...DefaultProps.navbarProps}>
-        <Scene key="heals" path={'/intervene'}  component={HealsContainer} Layout={HealsComponent} />
-      </Stack>,
-]}
+        {(product === 'cravity' && [
+          <Stack
+            key="addHeal"
+            title="ADD HEAL"
+            icon={() => <Icon name="star" {...DefaultProps.icons} />}
+            {...DefaultProps.navbarProps}
+          >
+            <Scene key="addHeal" path="/heal" component={AddHealComponent} />
+          </Stack>,
+          <Stack
+            key="heals"
+            title="HEALS"
+            icon={() => <Icon name="contact" path="/heals" {...DefaultProps.icons} />}
+            {...DefaultProps.navbarProps}
+          >
+            <Scene key="heals" component={HealsContainer} Layout={HealsComponent} />
+          </Stack>,
+        ]) || (product === 'aquafulness' && [
+          <Stack
+            key="intervene"
+            title="INTERVENE"
+            backgroundColor="#eee"
+            tabStyle={{ backgroundColor: '#ddd' }}
+            icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+            {...DefaultProps.navbarProps}
+          >
+            <Scene key="heals" path="/intervene" component={HealsContainer} Layout={HealsComponent} />
+          </Stack>,
+          <Stack
+            key="seeds"
+            title="SEEDS"
+            icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+            {...DefaultProps.navbarProps}
+          >
+            <Scene key="seeds" component={HealsContainer} Layout={HealsComponent} />
+          </Stack>,
+        ]) || (product === 'celebrify' && [
+          <Stack
+            key="participations"
+            title="TV"
+            tabStyle={{ backgroundColor: '#ddd' }}
+            icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+            {...DefaultProps.navbarProps}
+          >
+            <Scene key="heals" path="/participations" component={ParticipationsContainer} Layout={ParticipationsScreen} />
+          </Stack>,
+          <Stack
+            key="seeds"
+            title="SEEDS"
+            icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+            {...DefaultProps.navbarProps}
+          >
+            <Scene key="seeds" component={HealsContainer} Layout={HealsComponent} />
+          </Stack>,
+        ]) || (product === 'bathing' && [
+          <Stack
+            key="intervene"
+            title="INTERVENE"
+            backgroundColor="#eee"
+            tabStyle={{ backgroundColor: '#ddd' }}
+            icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+            {...DefaultProps.navbarProps}
+          >
+            <Scene key="heals" path="/intervene" component={HealsContainer} Layout={HealsComponent} />
+          </Stack>,
+        ])}
         <Stack
           key="profile"
           title="ACCOUNT"
           icon={() => <Icon name="contact" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
-          
+          <Scene key="profileHome" component={MemberContainer} Layout={ProfileScreen} />
+
           <Scene
             back
             key="locale"
@@ -130,12 +144,12 @@ const Index = (
             {...DefaultProps.navbarProps}
             component={LocaleContainer}
             Layout={LocaleComponent}
-            path={'/config/language'}
+            path="/config/language"
           />
           <Scene
             back
             key="updateProfile"
-            path={'/profile'}
+            path="/profile"
             title="UPDATE PROFILE"
             {...DefaultProps.navbarProps}
             component={UpdateProfileContainer}
@@ -148,7 +162,7 @@ const Index = (
       back
       key="signUp"
       title="SIGN UP"
-      path={'/register'}
+      path="/register"
       {...DefaultProps.navbarProps}
       component={SignUpContainer}
       Layout={SignUpComponent}
@@ -159,7 +173,7 @@ const Index = (
       back
       key="login"
       title="LOGIN"
-      path={'/login'}
+      path="/login"
       {...DefaultProps.navbarProps}
       component={LoginContainer}
       Layout={LoginComponent}
@@ -170,7 +184,7 @@ const Index = (
       back
       key="forgotPassword"
       title="FORGOT PASSWORD"
-      path={'/forgot'}
+      path="/forgot"
       {...DefaultProps.navbarProps}
       component={ForgotPasswordContainer}
       Layout={ForgotPasswordComponent}

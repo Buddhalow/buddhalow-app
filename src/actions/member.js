@@ -118,7 +118,7 @@ export function resetPassword(formData) {
 }
 
 /**
-  * Update Profile
+  * Update ProfileScreen
   */
 export function updateProfile(formData) {
   const {
@@ -165,7 +165,7 @@ export function updateProfile(formData) {
 
         // Update Redux
         await getUserData(dispatch);
-        await statusMessage(dispatch, 'success', 'Profile Updated');
+        await statusMessage(dispatch, 'success', 'ProfileScreen Updated');
         resolve();
       }).catch(reject);
   }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });

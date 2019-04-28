@@ -79,7 +79,7 @@ export function resetPassword(formData) {
 }
 
 /**
-  * Update Profile
+  * Update ProfileScreen
   */
 export function updateProfile(formData) {
   const {

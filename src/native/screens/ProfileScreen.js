@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import {
   Container, Content, List, ListItem, Body, Left, Text, Icon,
-} from 'native-base';
-import { Actions } from 'react-native-router-flux';
-import Header from './Header';
+} from 'native-base/index';
+import { Actions } from 'react-native-router-flux/index';
+import Header from '../components/Header';
 
-const Profile = ({ member, logout }) => (
+const ProfileScreen = ({ member, logout }) => (
   <Container>
     <Content>
       <List>
@@ -100,13 +100,13 @@ const Profile = ({ member, logout }) => (
   </Container>
 );
 
-Profile.propTypes = {
+ProfileScreen.propTypes = {
   member: PropTypes.shape({}),
   logout: PropTypes.func.isRequired,
 };
 
-Profile.defaultProps = {
+ProfileScreen.defaultProps = {
   member: {},
 };
 
-export default Profile;
+export default ProfileScreen;
