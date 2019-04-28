@@ -25,7 +25,7 @@ import FungalInfectionContainer from '../../containers/FungalInfection'
 import SignUpContainer from '../../containers/SignUp';
 import SignUpComponent from '../components/SignUp';
 
-import LoginContainer from '../../containers/Login';
+import LoginContainer from '../../containers/LoginContainer';
 import LoginComponent from '../components/Login';
 
 import ForgotPasswordContainer from '../../containers/ForgotPassword';

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { login } from '../actions/member';
+import { login, getBalances, getMemberData } from '../actions/buddhalow';
 
-const Login = ({
+const LoginContainer = ({
   Layout,
   onFormSubmit,
   member,
@@ -12,6 +12,8 @@ const Login = ({
   isLoading,
   infoMessage,
   errorMessage,
+  fetchBalances,
+  fetchMemberData,
   successMessage,
 }) => (
   <Layout
@@ -20,12 +22,14 @@ const Login = ({
     loading={isLoading}
     info={infoMessage}
     error={errorMessage}
+    fetchBalances={fetchBalances}
     success={successMessage}
+    fetchMemberData={fetchMemberData}
     onFormSubmit={onFormSubmit}
   />
 );
 
-Login.propTypes = {
+LoginContainer.propTypes = {
   Layout: PropTypes.func.isRequired,
   locale: PropTypes.string,
   member: PropTypes.shape({}).isRequired,
@@ -34,9 +38,11 @@ Login.propTypes = {
   infoMessage: PropTypes.string,
   errorMessage: PropTypes.string,
   successMessage: PropTypes.string,
+  fetchMemberData: PropTypes.func.isRequired,
+  fetchBalances: PropTypes.func.isRequired,
 };
 
-Login.defaultProps = {
+LoginContainer.defaultProps = {
   infoMessage: null,
   locale: null,
   errorMessage: null,
@@ -54,6 +60,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   onFormSubmit: login,
+  fetchBalances: getBalances,
+  fetchMemberData: getMemberData
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

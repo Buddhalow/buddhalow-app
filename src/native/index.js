@@ -15,6 +15,8 @@ import Loading from './components/Loading';
 
 import client from '../lib/buddhalow';
 
+import { PRODUCT } from '../env';
+
 console.log('CLIENT', client)
 
 
@@ -50,9 +52,9 @@ class App extends React.Component {
               persistor={this.props.persistor}
             >
               <StyleProvider style={getTheme(theme)}>
-                <Router uriPrefix={`${this.props.product}.app`}>
+                <Router uriPrefix={`${PRODUCT}.app`}>
                   <Stack key="root">
-                    {Routes(this.props.product)}
+                    {Routes}
                   </Stack>
                 </Router>
               </StyleProvider>

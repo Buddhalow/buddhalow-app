@@ -17,3 +17,4 @@ build/
 local.properties
 *.iml
 .env
+fixtures.js

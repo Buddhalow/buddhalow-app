@@ -18,7 +18,7 @@ import Cravings from '../../containers/Cravings';
 import HealsView from '../views/Heals';
 import Heals from '../../containers/Heals';
 import TemplateNothing from '../views/TemplateNothing';
-import LoginContainer from '../../containers/Login';
+import LoginContainer from '../../containers/LoginContainer';
 import LoginComponent from '../views/Login';
 import Logout from '../views/Logout';
 

@@ -85,6 +85,7 @@
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.3.2",
     "react-native": "~0.55.2",
+    "react-native-flexbox-grid": "^0.3.2",
     "react-native-router-flux": "4.0.0-beta.31",
     "react-native-web": "^0.9.9",
     "react-redux": "^5.0.7",

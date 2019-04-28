@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Column as Col, Row } from 'react-native-flexbox-grid';
+
 import { View, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Body, Text, Icon } from 'native-base';
 import moment from 'moment'
@@ -9,7 +11,7 @@ import Error from './Error';
 import Point from './Point';
 
 
-const ArchievementsComponent = ({
+const AchievementsComponent = ({
   error,
   loading,
   data,
@@ -40,31 +42,23 @@ const ArchievementsComponent = ({
   return (
     <Container>
       <Content padder>
-        <View
-          style={{
-            flexDirection: 'row',
-            padding: 56,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Point amount={100} label="KARMA" />
-          <Point amount={1} label="LEVEL" />
-          <Point amount={width} label="WIDTH" />
-        </View>
+        <Row size={12}>
+          <Col xs={12} sm={12} md={12} lg={4}>
+            <Point amount={100} label="KARMA" />
+          </Col>
+          <Col xs={12} sm={12} md={12} lg={4}>
+            <Point amount={1} label="LEVEL" />
+          </Col>
+          <Col xs={12} sm={12} md={12} lg={4}>
+            <Point amount={width} label="WIDTH" />
+          </Col>
+        </Row>
 
-        <View
-          style={{
-            flexWrap: 'wrap',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <Row size={12}>
           {achievements.map(item => (
-            <View>
+            <Col xs={12} sm={12} md={6} lg={4}>
               <Card transparent>
-                <CardItem cardBody style={{backgroundColor: '#FFffee'}}>
+                <CardItem cardBody style={{ backgroundColor: '#FFffee' }}>
                   <Body style={{ padding: 12, backgroundColor: '#FFffee', justifyContent: 'center', alignItems: 'center' }}>
                     <Icon name="star" size={28} />
                     <Text style={{ fontWeight: '800', textAlign: 'center' }}>{item.name}</Text>
@@ -76,15 +70,15 @@ const ArchievementsComponent = ({
                   </Body>
                 </CardItem>
               </Card>
-            </View>
+            </Col>
           ))}
-        </View>
+        </Row>
       </Content>
     </Container>
   );
 };
 
-ArchievementsComponent.propTypes = {
+AchievementsComponent.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   data: PropTypes.shape({
@@ -93,10 +87,10 @@ ArchievementsComponent.propTypes = {
   reFetch: PropTypes.func,
 };
 
-ArchievementsComponent.defaultProps = {
+AchievementsComponent.defaultProps = {
   error: null,
   reFetch: null,
   data: null,
 };
 
-export default ArchievementsComponent;
+export default AchievementsComponent;
