@@ -204,11 +204,11 @@ flexDirection: 'row', display: 'flex', alignItems: 'flex-end', padding: '20pt',
                     </Avatar>
                     <ListItemText primary="Cravings" />
                   </ListItem>
-                  <ListItem button component={Link} to="/dashboard/seminations">
+                  <ListItem button component={Link} to="/dashboard/seedings">
                     <Avatar>
                       <Icon>home</Icon>
                     </Avatar>
-                    <ListItemText primary="Seminations" />
+                    <ListItemText primary="Seedings" />
                   </ListItem>
                   <ListItem button component={Link} to="/dashboard/heals">
                     <Avatar>

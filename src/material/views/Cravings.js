@@ -15,7 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-const Seminations = ({ data }) => (
+const Seedings = ({ data }) => (
 	data ?
 	<Grid
       direction="row"
@@ -66,4 +66,4 @@ const Seminations = ({ data }) => (
 	</Grid> : <CircularProgress />
 )
 
-export default Seminations;
+export default Seedings;

@@ -58,13 +58,13 @@ switch (PRODUCT) {
             name
           }
         },
-        seminations {
+        seedings {
           id,
           restaurant {
             id,
             name
           },
-          seminated
+          seeded
         },
         statistics {
           cravings,

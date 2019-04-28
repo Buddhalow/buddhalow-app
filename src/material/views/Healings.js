@@ -33,7 +33,7 @@ const Healins = ({ data }) => (
 			    	{data.cravings && data.cravings instanceof Array ?
 			    		<Table>
 				    		<TableHead>
-				    			<TableRow>
+				    			<TableRow>	
 					    			<TableCell>Location</TableCell>
 					    			<TableCell>Reason</TableCell>
 					    			<TableCell>Healed</TableCell>

@@ -9,8 +9,8 @@ import TemplateSidebar from '../views/TemplateSidebar';
 // Routes
 import DashboardView from '../views/Dashboard';
 import Dashboard from '../../containers/Dashboard';
-import SeminationsView from '../views/Seminations';
-import Seminations from '../../containers/Seminations';
+import SeedingsView from '../views/Seedings';
+import Seedings from '../../containers/Seedings';
 import NotificationsView from '../views/Notifications';
 import Notifications from '../../containers/Notifications'
 import CravingsView from '../views/Cravings';
@@ -35,10 +35,10 @@ const Index = () => (
     />
     <Route
       exact
-      path="/dashboard/seminations"
+      path="/dashboard/seedings"
       render={props => (
         <TemplateSidebar>
-          <Seminations {...props} Layout={SeminationsView} />
+          <Seedings {...props} Layout={SeedingsView} />
         </TemplateSidebar>
       )}
     />
