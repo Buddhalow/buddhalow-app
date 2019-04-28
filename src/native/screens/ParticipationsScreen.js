@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FlatList, RefreshControl, } from 'react-native';
-import { Container, Content, Card, CardItem, Body, Text } from 'native-base/index';
+import { Container, Content, Card, CardItem, Body, Text } from 'native-base';
 import moment from 'moment/moment';
 
 import {translate} from '../../i18n';

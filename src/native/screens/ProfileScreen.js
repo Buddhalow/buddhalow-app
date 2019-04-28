@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import {
   Container, Content, List, ListItem, Body, Left, Text, Icon,
-} from 'native-base/index';
-import { Actions } from 'react-native-router-flux/index';
+} from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import Header from '../components/Header';
 
 const ProfileScreen = ({ member, logout }) => (
